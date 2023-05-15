@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -38,7 +39,8 @@ import retrofit2.Response;
 public class MainActivity extends AppCompatActivity{
     private RecyclerView.Adapter adapter, adapter2;
     private RecyclerView recyclerViewCategoryList, recyclerViewPopularList, recyclerViewBestSellerList;
-    private TextView userName;
+    private TextView userName, ivSearch;
+    private EditText etSearch;
     private ImageView avatar;
     APIService apiService;
     private List<Categories> categoriesList;
@@ -50,12 +52,24 @@ public class MainActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         User user = SharedPrefManager.getInstance(this).getUser();
+
+        etSearch = findViewById(R.id.etSearch);
+        ivSearch = findViewById(R.id.ivSearch);
+        ivSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, ProductSearchActivity.class);
+                intent.putExtra("txtSearch", etSearch.getText().toString());
+                startActivity(intent);
+            }
+        });
+
         if (SharedPrefManager.getInstance(this).isLoggedIn()){
             userName = findViewById(R.id.tvHiName);
 
             avatar = findViewById(R.id.ivAvatar);
 
-            userName.setText("Hi "+ user.getName());
+            userName.setText("Hi "+ user.getUserName());
             Glide.with(getApplicationContext()).load(contants.ROOT_URL+"Web"+user.getImages()).into(avatar);
         }
         recyclerViewCategory();
@@ -70,7 +84,8 @@ public class MainActivity extends AppCompatActivity{
         FloatingActionButton floatingActionButton = findViewById(R.id.cardBtn);
         LinearLayout homeBtn = findViewById(R.id.homeBtn);
         LinearLayout profileBtn = findViewById(R.id.profileBtn);
-        LinearLayout logoutBtn = findViewById(R.id.orderBtn);
+        LinearLayout contactBtn = findViewById(R.id.contactBtn);
+        LinearLayout orderBtn = findViewById(R.id.orderBtn);
 
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -89,11 +104,18 @@ public class MainActivity extends AppCompatActivity{
         profileBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SharedPrefManager.getInstance(getApplicationContext()).logout();
+                startActivity(new Intent(MainActivity.this, ProfileActivity.class));
             }
         });
 
-        logoutBtn.setOnClickListener(new View.OnClickListener() {
+        contactBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, ContactActivity.class));
+            }
+        });
+
+        orderBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(MainActivity.this, MainActivity.class));

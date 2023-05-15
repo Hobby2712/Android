@@ -2,7 +2,7 @@ package com.example.cuoiki.Utils;
 
 public class contants {
 
-    public static String localhost = "192.168.43.18:8080";
+    public static String localhost = "192.168.0.104:8080";
     //login và register API
     public static final String ROOT_URL = "http://" + localhost + "/";
     public static final String URL_REGISTER = ROOT_URL + "/shoppingapp/registrationapi.php?apicall=signup";

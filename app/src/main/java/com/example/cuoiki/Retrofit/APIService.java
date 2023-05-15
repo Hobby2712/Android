@@ -24,7 +24,7 @@ import retrofit2.http.Query;
 
 public interface APIService {
 
-    public static final String BASE_URL2="http://192.168.43.18:8080/Web/api/v1/";
+    public static final String BASE_URL2="http://192.168.0.104:8080/Web/api/v1/";
     Gson gson = new GsonBuilder().setDateFormat("yyyy MM d HH:mm:ss").create();
 
 
@@ -46,6 +46,9 @@ public interface APIService {
 
     @GET("products/{id}")
     Call<OneProductResponse> getProductById(@Path("id") String id);
+
+    @GET("products")
+    Call<ProductResponse> searchProductByName(@Query("search") String search);
 
     @FormUrlEncoded
     @POST("login")

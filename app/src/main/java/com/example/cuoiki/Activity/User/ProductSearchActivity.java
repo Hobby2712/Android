@@ -24,14 +24,13 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ProductCategoryActivity extends AppCompatActivity {
+public class ProductSearchActivity extends AppCompatActivity {
     ImageView iv_back;
-    String idCategory, CategoryName;
+    String txtSearch;
 
-    TextView tv_product;
+    TextView tvSoLuong;
 
     RecyclerView rcProduct;
-
 
     List<Product> productList;
 
@@ -39,16 +38,15 @@ public class ProductCategoryActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_product_category);
+        setContentView(R.layout.activity_product_search);
         anhXa();
-        idCategory = (String) getIntent().getSerializableExtra("idCategory");
-        CategoryName =(String) getIntent().getSerializableExtra("CategoryName");
+        txtSearch = (String) getIntent().getSerializableExtra("txtSearch");
         LoadProduct();
-        Log.e("ffff", idCategory + "====================");
+        Log.e("ffff", txtSearch + "====================");
         iv_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent1 =new Intent(ProductCategoryActivity.this, MainActivity.class);
+                Intent intent1 =new Intent(ProductSearchActivity.this, MainActivity.class);
                 startActivity(intent1);
                 finish();
             }
@@ -56,13 +54,14 @@ public class ProductCategoryActivity extends AppCompatActivity {
     }
 
     private void LoadProduct() {
-        tv_product.setText("Category: "+ CategoryName);
-        APIService.apiSevice2.getProductByCategoryId(idCategory).enqueue(new Callback<ProductResponse>() {
+        APIService.apiSevice2.searchProductByName(txtSearch).enqueue(new Callback<ProductResponse>() {
             @Override
             public void onResponse(Call<ProductResponse> call, Response<ProductResponse> response) {
                 productList = response.body().getData().getProducts();
+                int sl= productList.size();
+                tvSoLuong.setText(String.valueOf(sl)+" Products found");
                 Log.e("ffff", productList.toString());
-                productCategoryAdapter=new ProductCategoryAdapter(productList,ProductCategoryActivity.this);
+                productCategoryAdapter=new ProductCategoryAdapter(productList,ProductSearchActivity.this);
                 rcProduct.setHasFixedSize(true);
                 GridLayoutManager layoutManager=new GridLayoutManager(getApplicationContext(),2);
                 rcProduct.addItemDecoration(new GridSpacingItemDecoration(2, 30, true));
@@ -114,6 +113,6 @@ public class ProductCategoryActivity extends AppCompatActivity {
     private void anhXa() {
         iv_back = findViewById(R.id.iv_back);
         rcProduct = findViewById(R.id.rc_product);
-        tv_product = findViewById(R.id.tv_product);
+        tvSoLuong = findViewById(R.id.tvSoLuong);
     }
 }

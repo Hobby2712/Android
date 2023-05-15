@@ -26,6 +26,10 @@
         <activity android:name=".Activity.User.CartActivity" ></activity>
         <activity android:name=".Activity.User.ProductDetailActivity" ></activity>
         <activity android:name=".Activity.User.ProductCategoryActivity" ></activity>
+        <activity android:name=".Activity.User.ContactActivity" ></activity>
+        <activity android:name=".Activity.User.ProfileActivity" ></activity>
+        <activity android:name=".Activity.User.EditProfileActivity" ></activity>
+        <activity android:name=".Activity.User.ProductSearchActivity" ></activity>
         <activity
             android:name=".Activity.User.LoginActivity"
             android:exported="true">

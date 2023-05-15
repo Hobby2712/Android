@@ -90,6 +90,7 @@ public class LoginActivity extends AppCompatActivity {
                                 User user = new User(
                                         userJson.getInt("id"),
                                         userJson.getString("userName"),
+                                        userJson.getString("fullName"),
                                         userJson.getString("email"),
                                         userJson.getString("address"),
                                         userJson.getString("phone"),
