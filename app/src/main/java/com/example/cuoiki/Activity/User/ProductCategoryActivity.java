@@ -58,7 +58,7 @@ public class ProductCategoryActivity extends AppCompatActivity {
 
     private void LoadProduct() {
         tv_product.setText("Category: "+ CategoryName);
-        APIService.apiSevice2.getProductByCategoryId(Integer.valueOf(idCategory)).enqueue(new Callback<ProductResponse>() {
+        APIService.apiSevice2.getProductByCategoryId(idCategory).enqueue(new Callback<ProductResponse>() {
             @Override
             public void onResponse(Call<ProductResponse> call, Response<ProductResponse> response) {
                 productList = response.body().getData().getProducts();

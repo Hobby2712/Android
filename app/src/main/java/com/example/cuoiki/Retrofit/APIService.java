@@ -20,6 +20,7 @@ import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface APIService {
 
@@ -58,9 +59,8 @@ public interface APIService {
 //    @Multipart
 //    Call<List<ImageUpload>> upload(@Part("id") RequestBody id, @Part MultipartBody.Part images);
 
-    @FormUrlEncoded
-    @POST("products")
-    Call<ProductResponse> getProductByCategoryId(@Field("cid1") int categoryId);
+    @GET("products")
+    Call<ProductResponse> getProductByCategoryId(@Query("cid1") String cid1);
 
     @FormUrlEncoded
     @POST("newmealdetail.php")

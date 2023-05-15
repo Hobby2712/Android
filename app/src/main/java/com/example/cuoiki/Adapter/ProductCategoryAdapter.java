@@ -16,6 +16,7 @@ import com.bumptech.glide.Glide;
 import com.example.cuoiki.Model.Product;
 import com.example.cuoiki.R;
 import com.example.cuoiki.Activity.User.ProductDetailActivity;
+import com.example.cuoiki.Utils.contants;
 
 import java.util.List;
 
@@ -65,9 +66,9 @@ public class ProductCategoryAdapter extends RecyclerView.Adapter<ProductCategory
         Product product = array.get(position);
         holder.tenSp.setText(product.getName());
         Glide.with(context)
-                .load("http://192.168.0.103:8080/Web"+product.getImage())
+                .load(contants.ROOT_URL+"Web"+product.getImage())
                 .into(holder.images);
-        holder.fee.setText(product.getId()+"đ");
+        holder.fee.setText(product.getPrice()+"đ");
     }
     @Override
     public int getItemCount(){return array==null?0:array.size();}
