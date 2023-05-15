@@ -4,13 +4,14 @@ import java.io.Serializable;
 
 public class User implements Serializable {
     private int id;
-    private String userName , email, gender, images;
+    private String userName , email, address, phone, images;
 
-    public User(int id, String name, String email, String gender, String images) {
+    public User(int id, String userName, String email, String address, String phone, String images) {
         this.id = id;
-        this.userName = name;
+        this.userName = userName;
         this.email = email;
-        this.gender = gender;
+        this.address = address;
+        this.phone = phone;
         this.images = images;
     }
 
@@ -26,8 +27,8 @@ public class User implements Serializable {
         return email;
     }
 
-    public String getGender() {
-        return gender;
+    public String getDddress() {
+        return address;
     }
 
     public String getImages() {
@@ -46,21 +47,42 @@ public class User implements Serializable {
         this.email = email;
     }
 
-    public void setGender(String gender) {
-        this.gender = gender;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public void setImages(String images) {
         this.images = images;
     }
 
+    public String getUserName() {
+        return userName;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
     @Override
     public String toString() {
         return "User{" +
                 "id=" + id +
-                ", name='" + userName + '\'' +
+                ", userName='" + userName + '\'' +
                 ", email='" + email + '\'' +
-                ", gender='" + gender + '\'' +
+                ", address='" + address + '\'' +
+                ", phone='" + phone + '\'' +
                 ", images='" + images + '\'' +
                 '}';
     }

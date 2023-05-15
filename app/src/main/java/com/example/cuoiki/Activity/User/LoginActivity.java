@@ -15,6 +15,8 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.example.cuoiki.Activity.Shipper.ShipperActivity;
+import com.example.cuoiki.Activity.Vendor.ThongKeActivity;
 import com.example.cuoiki.R;
 import com.example.cuoiki.SharedPrefManager.SharedPrefManager;
 import com.example.cuoiki.Model.User;
@@ -90,12 +92,23 @@ public class LoginActivity extends AppCompatActivity {
                                         userJson.getString("userName"),
                                         userJson.getString("email"),
                                         userJson.getString("address"),
+                                        userJson.getString("phone"),
                                         userJson.getString("image")
                                 );
                                 SharedPrefManager.getInstance(getApplicationContext()).userLogin(user);
                                 finish();
-                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                                startActivity(intent);
+                                if(userJson.getInt("role") == 2) {
+                                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                    startActivity(intent);
+                                }
+                                else if(userJson.getInt("role") == 4) {
+                                    Intent intent = new Intent(LoginActivity.this, ThongKeActivity.class);
+                                    startActivity(intent);
+                                }
+                                else{
+                                    Intent intent = new Intent(LoginActivity.this, ShipperActivity.class);
+                                    startActivity(intent);
+                                }
                             }
                             else {
                                 Toast.makeText(getApplicationContext(), obj.getString("message"), Toast.LENGTH_SHORT).show();

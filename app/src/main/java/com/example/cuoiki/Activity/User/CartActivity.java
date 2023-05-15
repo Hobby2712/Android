@@ -22,8 +22,10 @@ import com.example.cuoiki.R;
 import com.example.cuoiki.RoomDatabase.ProductDatabase;
 import com.example.cuoiki.RoomDatabase.RoomProduct;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class CartActivity extends AppCompatActivity {
     private AppCompatButton appCompatButton;
@@ -32,7 +34,6 @@ public class CartActivity extends AppCompatActivity {
     private RecyclerView rc_list;
     private ProductCartAdapter productCartAdapter;
     private List<RoomProduct> productList;
-    Product p;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -124,13 +125,23 @@ public class CartActivity extends AppCompatActivity {
         productCartAdapter.setData(productList);
         int t = 0;
         for (RoomProduct i : productList) {
-            t += i.getQuantity() * i.getPrice();
+            if (i != null) {
+                t += i.getQuantity() * i.getPrice();
+            }
         }
         if (t > 0) {
-            tvTotalPrice.setText(p.Currency(t));
+            tvTotalPrice.setText(Currency(t));
         } else {
             tvTotalPrice.setText("0đ");
         }
+    }
+
+    public String Currency(int price) {
+        Locale localeVN = new Locale("vi", "VN");
+        NumberFormat vn = NumberFormat.getInstance(localeVN);
+
+        String tienvnd = vn.format(price);
+        return tienvnd +"đ";
     }
 
     public void AnhXa() {
