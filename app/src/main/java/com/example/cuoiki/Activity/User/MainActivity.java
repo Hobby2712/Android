@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity{
             avatar = findViewById(R.id.ivAvatar);
 
             userName.setText("Hi "+ user.getName());
-            Glide.with(getApplicationContext()).load("http://192.168.0.103:8080/Web"+user.getImages()).into(avatar);
+            Glide.with(getApplicationContext()).load(contants.ROOT_URL+"Web"+user.getImages()).into(avatar);
         }
         recyclerViewCategory();
         System.out.println("=================================");

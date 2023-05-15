@@ -4,7 +4,7 @@ public class contants {
 
     public static String localhost = "192.168.43.18:8080";
     //login và register API
-    private static final String ROOT_URL = "http://" + localhost + "/";
+    public static final String ROOT_URL = "http://" + localhost + "/";
     public static final String URL_REGISTER = ROOT_URL + "/shoppingapp/registrationapi.php?apicall=signup";
     public static final String URL_LOGIN= ROOT_URL + "Web/api/v1/login";
 

@@ -18,6 +18,7 @@ import com.bumptech.glide.Glide;
 import com.example.cuoiki.Activity.User.ProductCategoryActivity;
 import com.example.cuoiki.Model.Categories;
 import com.example.cuoiki.R;
+import com.example.cuoiki.Utils.contants;
 
 
 import java.io.File;
@@ -49,7 +50,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
         holder.categoryName.setText(categories.get(position).getName());
         holder.mainLayout.setBackground(ContextCompat.getDrawable(holder.itemView.getContext(), R.drawable.background_category));
         Glide.with(context)
-                .load("http://192.168.0.103:8080/Web"+categories.get(position).getImages())
+                .load(contants.ROOT_URL+"Web"+categories.get(position).getImages())
                 .into(holder.categoryPic);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
