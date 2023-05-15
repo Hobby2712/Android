@@ -42,7 +42,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
     public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         Product product = foodDomains.get(position);
         holder.title.setText(foodDomains.get(position).getName());
-        holder.fee.setText(String.valueOf(foodDomains.get(position).getPrice())+"đ");
+        holder.fee.setText(String.valueOf(product.Currency(foodDomains.get(position).getPrice())));
 
         Glide.with(context)
                 .load(contants.ROOT_URL+"Web"+foodDomains.get(position).getImage())

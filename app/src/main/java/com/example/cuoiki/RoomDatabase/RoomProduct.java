@@ -4,6 +4,8 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 import java.io.Serializable;
+import java.text.NumberFormat;
+import java.util.Locale;
 
 @Entity(tableName = "product")
 public class RoomProduct implements Serializable {
@@ -70,6 +72,14 @@ public class RoomProduct implements Serializable {
 
     public void setPrice(int price) {
         this.price = price;
+    }
+
+    public String Currency(int price) {
+        Locale localeVN = new Locale("vi", "VN");
+        NumberFormat vn = NumberFormat.getInstance(localeVN);
+
+        String tienvnd = vn.format(price);
+        return tienvnd +"đ";
     }
 }
 

@@ -9,6 +9,8 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
+import java.text.NumberFormat;
+import java.util.Locale;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -118,5 +120,13 @@ public class Product implements Serializable {
 
     public void setSold(int sold) {
         this.sold = sold;
+    }
+
+    public String Currency(int price) {
+        Locale localeVN = new Locale("vi", "VN");
+        NumberFormat vn = NumberFormat.getInstance(localeVN);
+
+        String tienvnd = vn.format(price);
+        return tienvnd +"đ";
     }
 }

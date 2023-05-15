@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 
 import com.example.cuoiki.Adapter.ProductCartAdapter;
+import com.example.cuoiki.Model.Product;
 import com.example.cuoiki.R;
 import com.example.cuoiki.RoomDatabase.ProductDatabase;
 import com.example.cuoiki.RoomDatabase.RoomProduct;
@@ -24,14 +25,14 @@ import com.example.cuoiki.RoomDatabase.RoomProduct;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CartActivity extends AppCompatActivity
-{
+public class CartActivity extends AppCompatActivity {
     private AppCompatButton appCompatButton;
     private ImageView iv_back;
     private TextView tvTotalPrice;
     private RecyclerView rc_list;
     private ProductCartAdapter productCartAdapter;
     private List<RoomProduct> productList;
+    Product p;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,11 +40,12 @@ public class CartActivity extends AppCompatActivity
         setContentView(R.layout.activity_cart);
         AnhXa();
         productList = new ArrayList<>();
-        productCartAdapter = new ProductCartAdapter(productList,this, new ProductCartAdapter.iClickListener() {
+        productCartAdapter = new ProductCartAdapter(productList, this, new ProductCartAdapter.iClickListener() {
             @Override
             public void plusQuantity(RoomProduct product) {
                 clickplusQuantity(product);
             }
+
             @Override
             public void minusQuantity(RoomProduct product) {
                 clickminusQuantity(product);
@@ -63,7 +65,7 @@ public class CartActivity extends AppCompatActivity
         iv_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent1 =new Intent(CartActivity.this, MainActivity.class);
+                Intent intent1 = new Intent(CartActivity.this, MainActivity.class);
                 startActivity(intent1);
                 finish();
             }
@@ -77,28 +79,29 @@ public class CartActivity extends AppCompatActivity
         });
     }
 
-    private void deleteAll(){
+    private void deleteAll() {
         ProductDatabase.getInstance(this).productDao().deleteAll();
         loadData();
     }
 
-    private void clickplusQuantity(RoomProduct product){
-        product.setQuantity(product.getQuantity()+1);
-        ProductDatabase.getInstance(this).productDao().update(product);
-        loadData();
-    }
-    private void clickminusQuantity(RoomProduct product){
-        int quantity = product.getQuantity();
-        if(quantity<=1){
-            clickDeleteProduct(product);
-            return;
-        }
-        product.setQuantity(quantity-1);
+    private void clickplusQuantity(RoomProduct product) {
+        product.setQuantity(product.getQuantity() + 1);
         ProductDatabase.getInstance(this).productDao().update(product);
         loadData();
     }
 
-    private void clickDeleteProduct(RoomProduct product){
+    private void clickminusQuantity(RoomProduct product) {
+        int quantity = product.getQuantity();
+        if (quantity <= 1) {
+            clickDeleteProduct(product);
+            return;
+        }
+        product.setQuantity(quantity - 1);
+        ProductDatabase.getInstance(this).productDao().update(product);
+        loadData();
+    }
+
+    private void clickDeleteProduct(RoomProduct product) {
         new AlertDialog.Builder(this)
                 .setTitle("Confirm delete product")
                 .setMessage("Are you sure")
@@ -115,17 +118,22 @@ public class CartActivity extends AppCompatActivity
     }
 
 
-    private void loadData(){
+    private void loadData() {
         //lấy danh sách product trong Room
-        productList= ProductDatabase.getInstance(this).productDao().getAll();
+        productList = ProductDatabase.getInstance(this).productDao().getAll();
         productCartAdapter.setData(productList);
         int t = 0;
-        for (RoomProduct i : productList){
-            t += i.getQuantity()*i.getPrice();
+        for (RoomProduct i : productList) {
+            t += i.getQuantity() * i.getPrice();
         }
-        tvTotalPrice.setText(String.valueOf(t)+"đ");
+        if (t > 0) {
+            tvTotalPrice.setText(p.Currency(t));
+        } else {
+            tvTotalPrice.setText("0đ");
+        }
     }
-    public void AnhXa(){
+
+    public void AnhXa() {
         rc_list = (RecyclerView) findViewById(R.id.imview);
         tvTotalPrice = findViewById(R.id.tvTotalPrice);
         iv_back = findViewById(R.id.iv_back);

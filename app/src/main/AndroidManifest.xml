@@ -27,7 +27,7 @@
         <activity android:name=".Activity.User.ProductDetailActivity" ></activity>
         <activity android:name=".Activity.User.ProductCategoryActivity" ></activity>
         <activity
-            android:name=".Activity.User.LoginActivity"
+            android:name=".Activity.User.OrderActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

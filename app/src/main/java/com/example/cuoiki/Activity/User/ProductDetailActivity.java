@@ -102,7 +102,7 @@ public class ProductDetailActivity extends AppCompatActivity {
                     product = response.body().getData().get1Product();
                     Log.e("Product detail id:", product.getName() + "====================");
                     txtpName.setText(product.getName());
-                    txtpPrice.setText(String.valueOf(product.getPrice()));
+                    txtpPrice.setText(product.Currency(product.getPrice()));
                     txtpSold.setText(String.valueOf(product.getSold()));
                     txtpQuantity.setText("1");
                     pIntructions.setText(product.getDescription());
@@ -119,13 +119,12 @@ public class ProductDetailActivity extends AppCompatActivity {
     }
     private void addProduct(){
         String pName = product.getName();
-        String pPrice = txtpPrice.getText().toString().trim();
         String pQuantity = txtpQuantity.getText().toString().trim();
         String image = product.getImage();
         Log.d(pQuantity, "addProduct: ");
 
         int quantity = Integer.valueOf(pQuantity);
-        int price = Integer.valueOf(pPrice);
+        int price = product.getPrice();
 
         if(TextUtils.isEmpty(pName) || TextUtils.isEmpty(pQuantity)){
             return;

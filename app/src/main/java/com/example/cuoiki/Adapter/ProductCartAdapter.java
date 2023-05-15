@@ -45,8 +45,8 @@ public class ProductCartAdapter extends RecyclerView.Adapter<ProductCartAdapter.
         RoomProduct products = productList.get(position);
         holder.tvProductName.setText(products.getName());
         holder.tvQuantity.setText(String.valueOf(products.getQuantity()));
-        holder.tvPrice.setText(String.valueOf(products.getPrice())+"đ");
-        holder.tvTotalPrice.setText(String.valueOf(products.getPrice()*products.getQuantity())+"đ");
+        holder.tvPrice.setText(products.Currency(products.getPrice()));
+        holder.tvTotalPrice.setText(products.Currency(products.getPrice()*products.getQuantity()));
         Glide.with(context)
                 .load(contants.ROOT_URL+"Web"+products.getImage())
                 .into(holder.ivImage);

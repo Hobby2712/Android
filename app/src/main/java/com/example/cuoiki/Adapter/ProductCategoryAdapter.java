@@ -68,7 +68,7 @@ public class ProductCategoryAdapter extends RecyclerView.Adapter<ProductCategory
         Glide.with(context)
                 .load(contants.ROOT_URL+"Web"+product.getImage())
                 .into(holder.images);
-        holder.fee.setText(product.getPrice()+"đ");
+        holder.fee.setText(product.Currency(product.getPrice()));
     }
     @Override
     public int getItemCount(){return array==null?0:array.size();}
