@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.bumptech.glide.Glide;
 import com.example.cuoiki.Model.Product;
 import com.example.cuoiki.R;
+import com.example.cuoiki.Response.OneProductResponse;
 import com.example.cuoiki.Retrofit.APIService;
 import com.example.cuoiki.Retrofit.RetrofitClient;
 import com.example.cuoiki.RoomDatabase.ProductDatabase;
@@ -30,7 +31,7 @@ import retrofit2.Response;
 
 public class ProductDetailActivity extends AppCompatActivity {
     String productId;
-    TextView txtpName, txtpPrice, pIntructions, txtpQuantity, btnTang, btnGiam, btnAdd;
+    TextView txtpName, txtpPrice, pIntructions, txtpQuantity, txtpSold, btnTang, btnGiam, btnAdd;
     ImageView pImage, tvBackHome;
     APIService apiService;
     Product product;
@@ -80,6 +81,7 @@ public class ProductDetailActivity extends AppCompatActivity {
     private void anhxa() {
         txtpName = findViewById(R.id.tvTitle);
         txtpPrice = findViewById(R.id.tvPrice);
+        txtpSold = findViewById(R.id.tvSold);
         pIntructions = findViewById(R.id.tvDescription);
         pImage = findViewById(R.id.imageProduct);
         btnGiam = findViewById(R.id.btn_Giam);
@@ -93,23 +95,24 @@ public class ProductDetailActivity extends AppCompatActivity {
         Log.e("Product detail id:", productId + "====================");
 
         apiService= RetrofitClient.getInstance().getRetrofit(contants.URL_PRODUCT2).create(APIService.class);
-        apiService.getProductById(productId).enqueue(new Callback<ProductResponse>() {
+        apiService.getProductById(productId).enqueue(new Callback<OneProductResponse>() {
             @Override
-            public void onResponse(Call<ProductResponse> call, Response<ProductResponse> response) {
+            public void onResponse(Call<OneProductResponse> call, Response<OneProductResponse> response) {
                 if(response.isSuccessful()){
-                    product = response.body().getData().getProducts().get(0);
+                    product = response.body().getData().get1Product();
                     Log.e("Product detail id:", product.getName() + "====================");
                     txtpName.setText(product.getName());
-                    txtpPrice.setText(product.getPrice());
+                    txtpPrice.setText(String.valueOf(product.getPrice()));
+                    txtpSold.setText(String.valueOf(product.getSold()));
                     txtpQuantity.setText("1");
                     pIntructions.setText(product.getDescription());
-                    Glide.with(getApplicationContext()).load("http://192.168.0.103:8080/Web"+product.getImage()).into(pImage);
+                    Glide.with(getApplicationContext()).load(contants.ROOT_URL+"Web"+product.getImage()).into(pImage);
                 }
             }
 
 
             @Override
-            public void onFailure(Call<ProductResponse> call, Throwable t) {
+            public void onFailure(Call<OneProductResponse> call, Throwable t) {
                 Log.d("logg fail",t.getMessage());
             }
         });

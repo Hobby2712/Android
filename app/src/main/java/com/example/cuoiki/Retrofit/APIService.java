@@ -1,15 +1,12 @@
 package com.example.cuoiki.Retrofit;
 
 import com.example.cuoiki.Model.Categories;
-import com.example.cuoiki.Model.Product;
 import com.example.cuoiki.Model.User;
 import com.example.cuoiki.Response.CategoryResponse;
+import com.example.cuoiki.Response.OneProductResponse;
 import com.example.cuoiki.Response.ProductResponse;
-import com.example.cuoiki.Response.ProductsResponse;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-
-import java.util.List;
 
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -47,7 +44,7 @@ public interface APIService {
     Call<ProductResponse> getBestSeller();
 
     @GET("products/{id}")
-    Call<ProductResponse> getProductById(@Path("id") String id);
+    Call<OneProductResponse> getProductById(@Path("id") String id);
 
     @FormUrlEncoded
     @POST("login")
@@ -63,7 +60,7 @@ public interface APIService {
 
     @FormUrlEncoded
     @POST("products")
-    Call<ProductsResponse> getProductByCategoryId(@Field("cid1") String cid1);
+    Call<ProductResponse> getProductByCategoryId(@Field("cid1") int categoryId);
 
     @FormUrlEncoded
     @POST("newmealdetail.php")

@@ -2,7 +2,7 @@ package com.example.cuoiki.Response;
 
 import com.google.gson.annotations.SerializedName;
 
-public class ProductsResponse {
+public class OneProductResponse {
     @SerializedName("message")
     private String message;
 
@@ -10,7 +10,7 @@ public class ProductsResponse {
     private boolean error;
 
     @SerializedName("data")
-    private ProductsData data;
+    private OneProductData data;
 
     public String getMessage() {
         return message;
@@ -20,7 +20,7 @@ public class ProductsResponse {
         return error;
     }
 
-    public ProductsData getData() {
+    public OneProductData getData() {
         return data;
     }
 }

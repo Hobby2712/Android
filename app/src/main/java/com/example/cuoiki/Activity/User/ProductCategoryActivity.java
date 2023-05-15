@@ -15,10 +15,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.cuoiki.Adapter.ProductCategoryAdapter;
 import com.example.cuoiki.Model.Product;
 import com.example.cuoiki.R;
-import com.example.cuoiki.Response.ProductsResponse;
+import com.example.cuoiki.Response.ProductResponse;
 import com.example.cuoiki.Retrofit.APIService;
-import com.example.cuoiki.Retrofit.RetrofitClient;
-import com.example.cuoiki.Utils.contants;
 
 import java.util.List;
 
@@ -60,9 +58,9 @@ public class ProductCategoryActivity extends AppCompatActivity {
 
     private void LoadProduct() {
         tv_product.setText("Category: "+ CategoryName);
-        APIService.apiSevice2.getProductByCategoryId(idCategory).enqueue(new Callback<ProductsResponse>() {
+        APIService.apiSevice2.getProductByCategoryId(Integer.valueOf(idCategory)).enqueue(new Callback<ProductResponse>() {
             @Override
-            public void onResponse(Call<ProductsResponse> call, Response<ProductsResponse> response) {
+            public void onResponse(Call<ProductResponse> call, Response<ProductResponse> response) {
                 productList = response.body().getData().getProducts();
                 Log.e("ffff", productList.toString());
                 productCategoryAdapter=new ProductCategoryAdapter(productList,ProductCategoryActivity.this);
@@ -74,7 +72,7 @@ public class ProductCategoryActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<ProductsResponse> call, Throwable t) {
+            public void onFailure(Call<ProductResponse> call, Throwable t) {
             }
         });
     }
