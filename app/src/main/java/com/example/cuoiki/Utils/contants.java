@@ -6,13 +6,13 @@ public class contants {
     //login và register API
     private static final String ROOT_URL = "http://" + localhost + "/";
     public static final String URL_REGISTER = ROOT_URL + "/shoppingapp/registrationapi.php?apicall=signup";
-    public static final String URL_LOGIN= "http://192.168.43.18:8080/Web/api/v1/login";
+    public static final String URL_LOGIN= ROOT_URL + "Web/api/v1/login";
 
-    public static final String URL_CATEGORY= "http://192.168.43.18:8080/Web/api/v1/categories/";
+    public static final String URL_CATEGORY= ROOT_URL + "Web/api/v1/categories/";
 
-    public static final String URL_PRODUCT = "http://192.168.43.18:8080/Web/api/v1/products/";
+    public static final String URL_PRODUCT = ROOT_URL + "Web/api/v1/products/";
 
-    public static final String URL_PRODUCT2 = "http://192.168.43.18:8080/Web/api/v1/";
+    public static final String URL_PRODUCT2 = ROOT_URL + "Web/api/v1/";
 
 
     private static final String URL_EDIT_PROFILE = "http://app.iotstar.vn/appfoods/updateimages.php";

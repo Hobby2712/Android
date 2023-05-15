@@ -63,7 +63,7 @@ public interface APIService {
 
     @FormUrlEncoded
     @POST("products")
-    Call<ProductsResponse> getProductByCategoryId(@Field("cid1") String idcategory);
+    Call<ProductsResponse> getProductByCategoryId(@Field("cid1") String cid1);
 
     @FormUrlEncoded
     @POST("newmealdetail.php")
