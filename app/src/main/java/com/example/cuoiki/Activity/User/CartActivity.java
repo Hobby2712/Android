@@ -119,11 +119,11 @@ public class CartActivity extends AppCompatActivity
         //lấy danh sách product trong Room
         productList= ProductDatabase.getInstance(this).productDao().getAll();
         productCartAdapter.setData(productList);
-        float t = 0;
+        int t = 0;
         for (RoomProduct i : productList){
             t += i.getQuantity()*i.getPrice();
         }
-        tvTotalPrice.setText(String.valueOf(t));
+        tvTotalPrice.setText(String.valueOf(t)+"đ");
     }
     public void AnhXa(){
         rc_list = (RecyclerView) findViewById(R.id.imview);

@@ -9,25 +9,25 @@ import java.io.Serializable;
 public class RoomProduct implements Serializable {
     @PrimaryKey(autoGenerate = true)
     private int id;
-    private String meal;
-    private String strmealthumb;
+    private String name;
+    private String image;
     private int quantity;
-    private double price;
+    private int price;
 
     public RoomProduct() {
     }
 
-    public RoomProduct(int id, String meal, int quantity, double price) {
+    public RoomProduct(int id, String name, int quantity, int price) {
         this.id = id;
-        this.meal = meal;
+        this.name = name;
         this.quantity = quantity;
         this.price = price;
     }
 
-    public RoomProduct(int id, String meal, String strmealthumb, int quantity, double price) {
+    public RoomProduct(int id, String name, String image, int quantity, int price) {
         this.id = id;
-        this.meal = meal;
-        this.strmealthumb = strmealthumb;
+        this.name = name;
+        this.image = image;
         this.quantity = quantity;
         this.price = price;
     }
@@ -40,20 +40,20 @@ public class RoomProduct implements Serializable {
         this.id = id;
     }
 
-    public String getMeal() {
-        return meal;
+    public String getName() {
+        return name;
     }
 
-    public void setMeal(String meal) {
-        this.meal = meal;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getStrmealthumb() {
-        return strmealthumb;
+    public String getImage() {
+        return image;
     }
 
-    public void setStrmealthumb(String strmealthumb) {
-        this.strmealthumb = strmealthumb;
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public int getQuantity() {
@@ -64,11 +64,11 @@ public class RoomProduct implements Serializable {
         this.quantity = quantity;
     }
 
-    public double getPrice() {
+    public int getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(int price) {
         this.price = price;
     }
 }

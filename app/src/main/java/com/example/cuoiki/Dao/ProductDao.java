@@ -24,7 +24,7 @@ public interface ProductDao {
     @Query("SELECT * FROM product WHERE id  IN (:id)")
     RoomProduct checkProduct(int id);
 
-    @Query("SELECT * FROM product WHERE meal  Like '%' || :name || '%'")
+    @Query("SELECT * FROM product WHERE name  Like '%' || :name || '%'")
     List<RoomProduct> searchName(String name);
 
     @Insert

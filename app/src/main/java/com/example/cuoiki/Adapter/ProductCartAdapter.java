@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.cuoiki.R;
 import com.example.cuoiki.RoomDatabase.RoomProduct;
+import com.example.cuoiki.Utils.contants;
 
 import java.util.List;
 
@@ -42,12 +43,12 @@ public class ProductCartAdapter extends RecyclerView.Adapter<ProductCartAdapter.
     @Override
     public void onBindViewHolder(@NonNull ProductHolder holder, int position) {
         RoomProduct products = productList.get(position);
-        holder.tvProductName.setText(products.getMeal());
+        holder.tvProductName.setText(products.getName());
         holder.tvQuantity.setText(String.valueOf(products.getQuantity()));
         holder.tvPrice.setText(String.valueOf(products.getPrice())+"đ");
         holder.tvTotalPrice.setText(String.valueOf(products.getPrice()*products.getQuantity())+"đ");
         Glide.with(context)
-                .load(products.getStrmealthumb())
+                .load(contants.ROOT_URL+"Web"+products.getImage())
                 .into(holder.ivImage);
 
         //xử lí sự kiện

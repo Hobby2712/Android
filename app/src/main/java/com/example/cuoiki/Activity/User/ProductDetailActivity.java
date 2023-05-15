@@ -118,14 +118,14 @@ public class ProductDetailActivity extends AppCompatActivity {
         });
     }
     private void addProduct(){
-        String pName = txtpName.getText().toString().trim();
+        String pName = product.getName();
         String pPrice = txtpPrice.getText().toString().trim();
         String pQuantity = txtpQuantity.getText().toString().trim();
         String image = product.getImage();
         Log.d(pQuantity, "addProduct: ");
 
         int quantity = Integer.valueOf(pQuantity);
-        double price = Double.valueOf(pPrice);
+        int price = Integer.valueOf(pPrice);
 
         if(TextUtils.isEmpty(pName) || TextUtils.isEmpty(pQuantity)){
             return;
