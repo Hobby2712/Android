@@ -35,7 +35,7 @@
             android:layout_height="match_parent"
             android:layout_marginStart="10dp"
             android:layout_weight="1"
-            android:text="Products"
+            android:text="Products Management"
             android:textColor="#7fad39"
             android:textSize="28sp"
             android:textStyle="bold|italic" />

@@ -2,9 +2,11 @@ package com.example.cuoiki.Retrofit;
 
 import com.example.cuoiki.Model.Categories;
 import com.example.cuoiki.Model.User;
+import com.example.cuoiki.Response.Category2Response;
 import com.example.cuoiki.Response.CategoryResponse;
 import com.example.cuoiki.Response.OneProductResponse;
 import com.example.cuoiki.Response.ProductResponse;
+import com.example.cuoiki.Response.StoreResponse;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -36,6 +38,9 @@ public interface APIService {
     @GET("cate1")
     Call<CategoryResponse> getCategoryAll();
 
+    @GET("cate2")
+    Call<Category2Response> getAllCategories2();
+
     @GET("cate1")
     Call<Categories> getCategory();
 
@@ -66,6 +71,18 @@ public interface APIService {
     @GET("products")
     Call<ProductResponse> getProductByCategoryId(@Query("cid1") String cid1);
 
+    @Multipart
+    @POST("products")
+    Call<OneProductResponse> addNewProduct(@Part("name") RequestBody pName,
+                                        @Part("price") RequestBody pPrice,
+                                        @Part("description") RequestBody description,
+                                        @Part("quantity") RequestBody quantity,
+                                        @Part("categoryId") RequestBody cateId,
+                                        @Part("storeId") RequestBody storeId,
+                                        @Part MultipartBody.Part image);
+
+    @GET("stores")
+    Call<StoreResponse> getStoreInfoByUserId(@Query("user") int userId);
     @FormUrlEncoded
     @POST("newmealdetail.php")
     Call<ProductResponse> getProduct(@Field("id") String id);

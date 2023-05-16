@@ -3,6 +3,7 @@ package com.example.cuoiki.Activity.User;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -15,10 +16,15 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.bumptech.glide.Glide;
 import com.example.cuoiki.Activity.Shipper.ShipperActivity;
 import com.example.cuoiki.Activity.Vendor.AddProductActivity;
 import com.example.cuoiki.Activity.Vendor.ThongKeActivity;
+import com.example.cuoiki.Model.Store;
 import com.example.cuoiki.R;
+import com.example.cuoiki.Response.StoreResponse;
+import com.example.cuoiki.Retrofit.APIService;
+import com.example.cuoiki.Retrofit.RetrofitClient;
 import com.example.cuoiki.SharedPrefManager.SharedPrefManager;
 import com.example.cuoiki.Model.User;
 import com.example.cuoiki.Volley.VolleySingle;
@@ -29,6 +35,9 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import retrofit2.Call;
+import retrofit2.Callback;
 
 
 public class LoginActivity extends AppCompatActivity {
@@ -62,6 +71,28 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
+    private void getStore(int userId){
+        APIService apiService = RetrofitClient.getInstance().getRetrofit(contants.URL_PRODUCT2).create(APIService.class);
+        apiService.getStoreInfoByUserId(userId).enqueue(new Callback<StoreResponse>() {
+            @Override
+            public void onResponse(Call<StoreResponse> call, retrofit2.Response<StoreResponse> response) {
+                if(response.isSuccessful()){
+                    if(!response.body().isError()){
+                        Store store = response.body().getData().getStore();
+                        SharedPrefManager.getInstance(getApplicationContext()).saveStoreInfo(store);
+                        Log.e("Store id:", SharedPrefManager.getInstance(getApplicationContext()).getStoreInfo().getId() + "====================");
+                    }
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<StoreResponse> call, Throwable t) {
+                Log.d("store api fail",t.getMessage());
+            }
+        });
+    }
+
     private void userLogin() {
         final String username = etname.getText().toString();
         final String password = etPassword.getText().toString();
@@ -86,7 +117,7 @@ public class LoginActivity extends AppCompatActivity {
                         try {
                             JSONObject obj = new JSONObject(response);
                             if(!obj.getBoolean("error")){
-                                Toast.makeText(getApplicationContext(), obj.getString("message"), Toast.LENGTH_SHORT).show();;
+                                Toast.makeText(getApplicationContext(), obj.getString("message"), Toast.LENGTH_SHORT).show();
                                 JSONObject userJson = obj.getJSONObject("data").getJSONObject("user");
                                 User user = new User(
                                         userJson.getInt("id"),
@@ -105,6 +136,7 @@ public class LoginActivity extends AppCompatActivity {
                                 }
                                 else if(userJson.getInt("role") == 4) {
                                     //Intent intent = new Intent(LoginActivity.this, ThongKeActivity.class);
+                                    getStore(SharedPrefManager.getInstance(getApplicationContext()).getUser().getId());
                                     Intent intent = new Intent(LoginActivity.this, AddProductActivity.class);
                                     startActivity(intent);
                                 }

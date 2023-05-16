@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 
 import com.example.cuoiki.Activity.User.LoginActivity;
+import com.example.cuoiki.Model.Store;
 import com.example.cuoiki.Model.User;
 
 public class SharedPrefManager {
@@ -18,6 +19,11 @@ public class SharedPrefManager {
     private static final String KEY_PHONE = "keyphone";
     private static final String KEY_ID = "keyid";
     private static final String KEY_IMAGES = "keyimages";
+
+    private static final String KEY_STORE_ID = "keystoreid";
+    private static final String KEY_STORE_NAME = "keystorename";
+    private static final String KEY_STORE_CREATED_DATE = "keystorecreateddate";
+    private static final String KEY_STORE_ACTIVE = "keystoreactive";
 
     private static SharedPrefManager mIstance;
     private static Context ctx;
@@ -45,6 +51,16 @@ public class SharedPrefManager {
         editor.apply();
     }
 
+    public void saveStoreInfo(Store store) {
+        SharedPreferences sharedPreferences = ctx.getSharedPreferences(SHARE_PREF_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt(KEY_STORE_ID, store.getId());
+        editor.putString(KEY_STORE_NAME, store.getName());
+        editor.putString(KEY_STORE_CREATED_DATE, store.getCreatedDate());
+        editor.putInt(KEY_STORE_ACTIVE, store.getIsActive());
+        editor.apply();
+    }
+
     public boolean isLoggedIn(){
         SharedPreferences sharedPreferences = ctx.getSharedPreferences(SHARE_PREF_NAME, Context.MODE_PRIVATE);
         return sharedPreferences.getString(KEY_USERNAME, null) != null;
@@ -63,6 +79,17 @@ public class SharedPrefManager {
         );
     }
 
+    public Store getStoreInfo() {
+        SharedPreferences sharedPreferences = ctx.getSharedPreferences(SHARE_PREF_NAME, Context.MODE_PRIVATE);
+        int id = sharedPreferences.getInt(KEY_STORE_ID, -1);
+        String name = sharedPreferences.getString(KEY_STORE_NAME, null);
+        String createdDate = sharedPreferences.getString(KEY_STORE_CREATED_DATE, null);
+        int isActive = sharedPreferences.getInt(KEY_STORE_ACTIVE, 0);
+        if (name == null || createdDate == null || isActive == 0) {
+            return null;
+        }
+        return new Store(id, name, createdDate, isActive);
+    }
 
     public void logout(){
         SharedPreferences sharedPreferences = ctx.getSharedPreferences(SHARE_PREF_NAME, Context.MODE_PRIVATE);
