@@ -85,7 +85,7 @@
             android:orientation="vertical">
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/imview"
+                android:id="@+id/rv_store_products"
                 android:layout_width="match_parent"
                 android:layout_height="458dp" />
         </LinearLayout>

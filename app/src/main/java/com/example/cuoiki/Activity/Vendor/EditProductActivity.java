@@ -7,7 +7,6 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-
 import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.util.Log;
@@ -31,14 +30,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
-import com.example.cuoiki.Activity.User.MainActivity;
-import com.example.cuoiki.Adapter.CategoryAdapter;
 import com.example.cuoiki.Model.Categories;
 import com.example.cuoiki.Model.KeyValueCategories;
 import com.example.cuoiki.Model.Store;
 import com.example.cuoiki.R;
 import com.example.cuoiki.Response.Category2Response;
-import com.example.cuoiki.Response.CategoryResponse;
 import com.example.cuoiki.Response.OneProductResponse;
 import com.example.cuoiki.Retrofit.APIService;
 import com.example.cuoiki.Retrofit.RetrofitClient;
@@ -58,10 +54,9 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class AddProductActivity extends AppCompatActivity {
+public class EditProductActivity extends AppCompatActivity {
 
     List<KeyValueCategories> categories = new ArrayList<>();
-    //String[] item = {"Material", "Design", "Components", "Android", "5.0 Lollipop"};
     EditText pName, pPrice, description, quantity;
     TextView btnChooseImg;
     ImageView imgUpload, btnBack;
@@ -75,19 +70,19 @@ public class AddProductActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_vendor_addp);
+        setContentView(R.layout.activity_vendor_editp);
 
         anhXa();
         getListCategories2();
         adapterItems = new ArrayAdapter<>(this, R.layout.list_item, categories);
         categoriesList.setAdapter(adapterItems);
-
+        Log.e("edit product", "productid: " + getIntent().getSerializableExtra("id"));
+        Log.e("edit product", "storeid: " + SharedPrefManager.getInstance(this).getStoreInfo());
         categoriesList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 KeyValueCategories selectedKeyValue = (KeyValueCategories) adapterView.getItemAtPosition(position);
                 categorySelected = selectedKeyValue.getKey();
-                //Toast.makeText(AddProductActivity.this, "category id: " + categorySelected, Toast.LENGTH_LONG).show();
             }
         });
 
@@ -104,10 +99,19 @@ public class AddProductActivity extends AppCompatActivity {
                 if(mUri != null && categorySelected != null){
                     uploadImage();
                 } else if(categorySelected == null){
-                    Toast.makeText(AddProductActivity.this, "Hãy chọn danh mục", Toast.LENGTH_LONG).show();
+                    Toast.makeText(EditProductActivity.this, "Hãy chọn danh mục", Toast.LENGTH_LONG).show();
                 } else {
-                    Toast.makeText(AddProductActivity.this, "Hãy chọn hình ảnh sản phẩm", Toast.LENGTH_LONG).show();
+                    Toast.makeText(EditProductActivity.this, "Hãy chọn hình ảnh sản phẩm", Toast.LENGTH_LONG).show();
                 }
+            }
+        });
+
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(EditProductActivity.this, ManageProductActivity.class);
+                finish();
+                startActivity(intent);
             }
         });
     }
@@ -192,7 +196,7 @@ public class AddProductActivity extends AppCompatActivity {
             public void onResponse(Call<OneProductResponse> call, Response<OneProductResponse> response) {
                 if(response.isSuccessful()){
                     if(!response.body().isError()){
-                        Toast.makeText(AddProductActivity.this, "Thêm sản phẩm thành công", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(EditProductActivity.this, "Thêm sản phẩm thành công", Toast.LENGTH_SHORT).show();
                     }
                 }
 
@@ -200,9 +204,9 @@ public class AddProductActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<OneProductResponse> call, Throwable t) {
-                Toast.makeText(AddProductActivity.this, "Gọi API thất bại", Toast.LENGTH_SHORT).show();
+                Toast.makeText(EditProductActivity.this, "Gọi API thất bại", Toast.LENGTH_SHORT).show();
 
-                Log.d(AddProductActivity.class.getName(), t.toString());
+                Log.d(EditProductActivity.class.getName(), t.toString());
             }
         });
     }
@@ -233,15 +237,15 @@ public class AddProductActivity extends AppCompatActivity {
     }
 
     private void anhXa(){
-        pName = findViewById(R.id.etName);
-        pPrice = findViewById(R.id.etPrice);
-        quantity = findViewById(R.id.etQuantity);
-        description = findViewById(R.id.etDescription);
-        btnChooseImg = findViewById(R.id.tv_choose_image);
-        imgUpload = findViewById(R.id.ivUploaded);
-        categoriesList = findViewById(R.id.auto_complete_textview);
-        btnBack = findViewById(R.id.iv_back);
-        btnAdd = findViewById(R.id.addProductBtn);
+        pName = findViewById(R.id.etEditName);
+        pPrice = findViewById(R.id.etEditPrice);
+        quantity = findViewById(R.id.etEditQuantity);
+        description = findViewById(R.id.etEditDescription);
+        btnChooseImg = findViewById(R.id.choose_edit_image);
+        imgUpload = findViewById(R.id.ivEditUploaded);
+        categoriesList = findViewById(R.id.category_choose);
+        btnBack = findViewById(R.id.iv_edit_back);
+        btnAdd = findViewById(R.id.editProductBtn);
     }
     public static String[] storage_permissions = {
             Manifest.permission.WRITE_EXTERNAL_STORAGE,
