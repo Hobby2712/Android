@@ -10,7 +10,7 @@
 
     <LinearLayout
         android:id="@+id/header"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
@@ -18,27 +18,15 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints">
 
-        <ImageView
-            android:id="@+id/iv_back"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
-            android:layout_marginStart="5dp"
-            android:background="@drawable/btn_back_background"
-            android:padding="5dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:srcCompat="@drawable/icon_back"
-            tools:ignore="MissingConstraints" />
-
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginStart="10dp"
-            android:layout_weight="1"
-            android:text="Products Management"
-            android:textColor="#7fad39"
-            android:textSize="28sp"
-            android:textStyle="bold|italic" />
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:minHeight="?actionBarSize"
+            android:padding="16dp"
+            app:title="Vendor"
+            android:textAppearance="@style/TextAppearance.Widget.AppCompat.Toolbar.Title" />
     </LinearLayout>
 
     <LinearLayout
