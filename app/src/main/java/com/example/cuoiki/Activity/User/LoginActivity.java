@@ -16,6 +16,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.example.cuoiki.Activity.Shipper.ShipperActivity;
+import com.example.cuoiki.Activity.Vendor.AddProductActivity;
 import com.example.cuoiki.Activity.Vendor.ThongKeActivity;
 import com.example.cuoiki.R;
 import com.example.cuoiki.SharedPrefManager.SharedPrefManager;
@@ -103,7 +104,8 @@ public class LoginActivity extends AppCompatActivity {
                                     startActivity(intent);
                                 }
                                 else if(userJson.getInt("role") == 4) {
-                                    Intent intent = new Intent(LoginActivity.this, ThongKeActivity.class);
+                                    //Intent intent = new Intent(LoginActivity.this, ThongKeActivity.class);
+                                    Intent intent = new Intent(LoginActivity.this, AddProductActivity.class);
                                     startActivity(intent);
                                 }
                                 else{

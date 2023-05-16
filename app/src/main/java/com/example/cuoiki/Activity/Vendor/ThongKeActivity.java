@@ -1,4 +1,7 @@
 package com.example.cuoiki.Activity.Vendor;
 
-public class ThongKeActivity {
+import androidx.appcompat.app.AppCompatActivity;
+
+public class ThongKeActivity extends AppCompatActivity {
+
 }
