@@ -26,8 +26,8 @@ import retrofit2.http.Query;
 
 public interface APIService {
 
-    //public static final String BASE_URL2="http://192.168.0.104:8080/Web/api/v1/";
-    public static final String BASE_URL2="http://192.168.1.20:8080/Web/api/v1/";
+    public static final String BASE_URL2="http://192.168.0.103:8080/Web/api/v1/";
+    //public static final String BASE_URL2="http://192.168.1.20:8080/Web/api/v1/";
     Gson gson = new GsonBuilder().setDateFormat("yyyy MM d HH:mm:ss").create();
 
 

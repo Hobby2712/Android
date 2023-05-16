@@ -31,6 +31,8 @@
         <activity android:name=".Activity.User.ProfileActivity" ></activity>
         <activity android:name=".Activity.User.EditProfileActivity" ></activity>
         <activity android:name=".Activity.User.ProductSearchActivity" ></activity>
+        <activity android:name=".Activity.User.CheckoutActivity" ></activity>
+
         <activity android:name=".Activity.Vendor.AddProductActivity" ></activity>
         <activity
             android:name=".Activity.User.LoginActivity"
