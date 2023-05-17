@@ -101,6 +101,15 @@ public interface APIService {
                                            @Part("storeId") RequestBody storeId,
                                            @Part MultipartBody.Part image);
 
+    @PUT("products/{id}")
+    Call<OneProductResponse> editStoreProductWithoutImage(@Path("id") long id,
+                                                          @Part("name") RequestBody pName,
+                                                          @Part("price") RequestBody pPrice,
+                                                          @Part("description") RequestBody description,
+                                                          @Part("quantity") RequestBody quantity,
+                                                          @Part("categoryId") RequestBody cateId,
+                                                          @Part("storeId") RequestBody storeId);
+
     @DELETE("products/{id}")
     Call<OneProductResponse> deleteProductById(@Path("id") long id);
 
