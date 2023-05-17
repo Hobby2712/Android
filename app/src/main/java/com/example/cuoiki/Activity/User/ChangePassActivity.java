@@ -38,11 +38,11 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class EditProfileActivity extends AppCompatActivity {
+public class ChangePassActivity extends AppCompatActivity {
     private String TAG = EditProfileActivity.class.getSimpleName();
     private AppCompatButton appCompatButton;
-    String name, address, phone;
-    private EditText etName, etAddress, etPhone;
+    String oldpass, newpass, rnewpass;
+    private EditText etOldPass, etNewPass, etRNewPass;
     private ImageView iv_back;
 
     APIService apiService;
@@ -50,17 +50,13 @@ public class EditProfileActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profile_edit);
+        setContentView(R.layout.activity_profile_changpass);
         AnhXa();
-        User user = SharedPrefManager.getInstance(this).getUser();
-        etName.setText(user.getFullName());
-        etAddress.setText(user.getAddress());
-        etPhone.setText(user.getPhone());
 
         iv_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent1 = new Intent(EditProfileActivity.this, ProfileActivity.class);
+                Intent intent1 = new Intent(ChangePassActivity.this, ProfileActivity.class);
                 startActivity(intent1);
                 finish();
             }
@@ -69,36 +65,36 @@ public class EditProfileActivity extends AppCompatActivity {
         appCompatButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                EditProfile();
+                ChangePass();
             }
         });
     }
 
-    public void EditProfile(){
+    public void ChangePass(){
         User user = SharedPrefManager.getInstance(this).getUser();
-        name = etName.getText().toString().trim();
-        address = etAddress.getText().toString().trim();
-        phone = etPhone.getText().toString().trim();
+        oldpass = etOldPass.getText().toString().trim();
+        newpass = etNewPass.getText().toString().trim();
+        rnewpass = etRNewPass.getText().toString().trim();
 
-        if (TextUtils.isEmpty(name)){
-            etName.setError("Please enter your full name");
-            etName.requestFocus();
+        if (TextUtils.isEmpty(oldpass)){
+            etOldPass.setError("Please enter your old password");
+            etOldPass.requestFocus();
             return;
         }
 
-        if (TextUtils.isEmpty(address)){
-            etAddress.setError("Please enter your address");
-            etAddress.requestFocus();
+        if (TextUtils.isEmpty(newpass)){
+            etNewPass.setError("Please enter your new password");
+            etNewPass.requestFocus();
             return;
         }
 
-        if (TextUtils.isEmpty(phone)){
-            etPhone.setError("Please enter your address");
-            etPhone.requestFocus();
+        if (TextUtils.isEmpty(rnewpass)){
+            etRNewPass.setError("Please enter repeat your new password");
+            etRNewPass.requestFocus();
             return;
         }
         apiService = RetrofitClient.getInstance().getRetrofit(contants.URL_PRODUCT2).create(APIService.class);
-        apiService.editProfile(user.getId(), name, address, phone).enqueue(new Callback<VerifyResponse>() {
+        apiService.changePass(user.getId(), oldpass, newpass, rnewpass).enqueue(new Callback<VerifyResponse>() {
             @Override
             public void onResponse(Call<VerifyResponse> call, Response<VerifyResponse> response) {
                 try {
@@ -106,19 +102,11 @@ public class EditProfileActivity extends AppCompatActivity {
                     if (response.isSuccessful()) {
                         Toast.makeText(getApplicationContext(), signUpResponse.getMessage(), Toast.LENGTH_SHORT).show();
                         if (!signUpResponse.isError()) {
-                            User user1 = new User(
-                                    user.getId(),
-                                    user.getRole(),
-                                    user.getUserName(),
-                                    name,
-                                    user.getEmail(),
-                                    address,
-                                    phone,
-                                    user.getImages()
-                            );
-                            SharedPrefManager.getInstance(getApplicationContext()).userLogin(user1);
-                            finish();
-                            Intent intent = new Intent(EditProfileActivity.this, ProfileActivity.class);
+                            Intent intent = new Intent(ChangePassActivity.this, VerifyChangePassActivity.class);
+                            intent.putExtra("id", user.getId());
+                            intent.putExtra("oldpass", oldpass);
+                            intent.putExtra("pass", newpass);
+                            intent.putExtra("otp", response.body().getData().getOtp());
                             startActivity(intent);
                         }
                     } else {
@@ -140,9 +128,9 @@ public class EditProfileActivity extends AppCompatActivity {
 
 
     public void AnhXa() {
-        etName = findViewById(R.id.etName);
-        etAddress = findViewById(R.id.etAddress);
-        etPhone = findViewById(R.id.etPhone);
+        etOldPass = findViewById(R.id.etOldPass);
+        etNewPass = findViewById(R.id.etNewPass);
+        etRNewPass = findViewById(R.id.etRNewPass);
 
         iv_back = findViewById(R.id.iv_back);
         appCompatButton = findViewById(R.id.appCompatButton);

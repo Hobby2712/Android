@@ -58,8 +58,8 @@ public class MainActivity extends AppCompatActivity{
         ivSearch = findViewById(R.id.ivSearch);
         tvQuantity = findViewById(R.id.tvQuantity);
 
-//        int quantity = ProductDatabase.getInstance(this).productDao().getAll().size();
-//        tvQuantity.setText(String.valueOf(quantity));
+        int quantity = ProductDatabase.getInstance(this).productDao().getAll().size();
+        tvQuantity.setText(String.valueOf(quantity));
 
         ivSearch.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,7 +76,12 @@ public class MainActivity extends AppCompatActivity{
             avatar = findViewById(R.id.ivAvatar);
 
             userName.setText("Hi "+ user.getUserName());
-            Glide.with(getApplicationContext()).load(contants.ROOT_URL+"Web"+user.getImages()).into(avatar);
+            if(!user.getImages().isEmpty()) {
+                Glide.with(getApplicationContext()).load(contants.ROOT_URL + "Web" + user.getImages()).into(avatar);
+            }
+            else{
+                Glide.with(getApplicationContext()).load(R.drawable.bottom_profile).into(avatar);
+            }
         }
         recyclerViewCategory();
         System.out.println("=================================");
@@ -124,7 +129,7 @@ public class MainActivity extends AppCompatActivity{
         orderBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, MainActivity.class));
+                startActivity(new Intent(MainActivity.this,OrderActivity.class));
             }
         });
     }

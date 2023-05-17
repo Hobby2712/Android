@@ -50,9 +50,17 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        if (SharedPrefManager.getInstance(this).isLoggedIn()){
+        if (SharedPrefManager.getInstance(this).isLoggedIn() && SharedPrefManager.getInstance(this).getUser().getRole()==2){
             finish();
             startActivity(new Intent(this, MainActivity.class));
+        }
+        else if (SharedPrefManager.getInstance(this).isLoggedIn() && SharedPrefManager.getInstance(this).getUser().getRole()==4){
+            finish();
+            startActivity(new Intent(this, ManageProductActivity.class));
+        }
+        else if (SharedPrefManager.getInstance(this).isLoggedIn() && SharedPrefManager.getInstance(this).getUser().getRole()==3){
+            finish();
+            startActivity(new Intent(this, ShipperActivity.class));
         }
 //        progressBar = findViewById(R.id.progressBar);
         etname = findViewById(R.id.etUserName);
@@ -109,6 +117,7 @@ public class LoginActivity extends AppCompatActivity {
                                 JSONObject userJson = obj.getJSONObject("data").getJSONObject("user");
                                 User user = new User(
                                         userJson.optInt("id"),
+                                        userJson.optInt("role"),
                                         userJson.optString("userName"),
                                         userJson.optString("fullName"),
                                         userJson.optString("email"),

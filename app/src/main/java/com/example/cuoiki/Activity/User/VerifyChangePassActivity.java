@@ -27,10 +27,11 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class VerifySignUpActivity extends AppCompatActivity {
+public class VerifyChangePassActivity extends AppCompatActivity {
 
     private String TAG = VerifySignUpActivity.class.getSimpleName();
-    String email, user, pass, otp, otpSend;
+    String oldpass, pass, otp, otpSend;
+    int id;
     TextView tvAccount, tvCancel, tvContinue, tvResend;
     EditText etOtp;
     APIService apiService;
@@ -40,8 +41,8 @@ public class VerifySignUpActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_verify);
         anhXa();
-        email = (String) getIntent().getSerializableExtra("email");
-        tvAccount.setText("Mã OTP đã được gửi đến " + email);
+        User user = SharedPrefManager.getInstance(this).getUser();
+        tvAccount.setText("Mã OTP đã được gửi đến " + user.getEmail());
 
         tvContinue.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,7 +55,7 @@ public class VerifySignUpActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 finish();
-                Intent intent = new Intent(VerifySignUpActivity.this, SignUpActivity.class);
+                Intent intent = new Intent(VerifyChangePassActivity.this, ProfileActivity.class);
                 startActivity(intent);
 
             }
@@ -78,49 +79,46 @@ public class VerifySignUpActivity extends AppCompatActivity {
         }
 
         apiService= RetrofitClient.getInstance().getRetrofit(contants.URL_PRODUCT2).create(APIService.class);
-        apiService.verifysignup(email,user,pass,otp,otpSend).enqueue(new Callback<SignUpResponse>() {
+        apiService.verifyChangePass(id,pass,otp,otpSend).enqueue(new Callback<VerifyResponse>() {
             @Override
-            public void onResponse(Call<SignUpResponse> call, Response<SignUpResponse> response) {
+            public void onResponse(Call<VerifyResponse> call, Response<VerifyResponse> response) {
                 try {
-                    SignUpResponse signUpResponse = response.body();
+                    VerifyResponse changePassResponse = response.body();
                     if (response.isSuccessful()) {
-                        Toast.makeText(getApplicationContext(), signUpResponse.getMessage(), Toast.LENGTH_SHORT).show();
-                        if (!signUpResponse.isError()) {
-                            User user = signUpResponse.getData().getUser();
-                            SharedPrefManager.getInstance(getApplicationContext()).userLogin(user);
+                        Toast.makeText(getApplicationContext(), changePassResponse.getMessage(), Toast.LENGTH_SHORT).show();
+                        if (!changePassResponse.isError()) {
                             finish();
-                            Intent intent = new Intent(VerifySignUpActivity.this, MainActivity.class);
+                            Intent intent = new Intent(VerifyChangePassActivity.this, ProfileActivity.class);
                             startActivity(intent);
                         }
                     } else {
-                        Toast.makeText(getApplicationContext(), signUpResponse.getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), changePassResponse.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
             @Override
-            public void onFailure(Call<SignUpResponse> call, Throwable t) {
+            public void onFailure(Call<VerifyResponse> call, Throwable t) {
             }
         });
     }
 
 
     private void ReSend(){
-
         apiService = RetrofitClient.getInstance().getRetrofit(contants.URL_PRODUCT2).create(APIService.class);
-        apiService.signup(email, user, pass, pass).enqueue(new Callback<VerifyResponse>() {
+        apiService.changePass(id, oldpass, pass, pass).enqueue(new Callback<VerifyResponse>() {
             @Override
             public void onResponse(Call<VerifyResponse> call, Response<VerifyResponse> response) {
                 try {
-                    VerifyResponse signUpResponse = response.body();
+                    VerifyResponse changePassResponse = response.body();
                     if (response.isSuccessful()) {
-                        Toast.makeText(getApplicationContext(), signUpResponse.getMessage(), Toast.LENGTH_SHORT).show();
-                        if (!signUpResponse.isError()) {
+                        Toast.makeText(getApplicationContext(), changePassResponse.getMessage(), Toast.LENGTH_SHORT).show();
+                        if (!changePassResponse.isError()) {
                             otpSend = response.body().getData().getOtp();
                         }
                     } else {
-                        Toast.makeText(getApplicationContext(), signUpResponse.getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), changePassResponse.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -137,8 +135,8 @@ public class VerifySignUpActivity extends AppCompatActivity {
     }
 
     private void anhXa() {
-        email = (String) getIntent().getSerializableExtra("email");
-        user = (String) getIntent().getSerializableExtra("user");
+        oldpass = (String) getIntent().getSerializableExtra("oldpass");
+        id = (int) getIntent().getSerializableExtra("id");
         pass = (String) getIntent().getSerializableExtra("pass");
         otpSend = (String) getIntent().getSerializableExtra("otp");
         tvAccount = findViewById(R.id.tvAccount);

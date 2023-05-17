@@ -70,13 +70,13 @@ public class VerifyForgotPassActivity extends AppCompatActivity {
         newpass = etNewPass.getText().toString().trim();
 
         if (TextUtils.isEmpty(otp)){
-            etOtp.setError("Please enter your username");
+            etOtp.setError("Please enter your otp");
             etOtp.requestFocus();
             return;
         }
 
         if (TextUtils.isEmpty(newpass)){
-            etNewPass.setError("Please enter your username");
+            etNewPass.setError("Please enter your pass");
             etNewPass.requestFocus();
             return;
         }
