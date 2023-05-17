@@ -77,6 +77,9 @@ public interface APIService {
     @GET("orders")
     Call<OrderResponse> getOrders(@Query("user") int userId);
 
+    @GET("orders")
+    Call<OrderResponse> changeStatus(@Query("id") int id, @Query("status") int status);
+
     @GET("products")
     Call<ProductResponse> searchStoreProductByName(@Query("store") int storeId,
                                                    @Query("search") String search);
