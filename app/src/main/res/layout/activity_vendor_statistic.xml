@@ -43,40 +43,40 @@
         app:layout_constraintTop_toBottomOf="@+id/header"
         app:layout_constraintVertical_bias="0.0">
 
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Biểu đồ doanh thu"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:padding="16dp"/>
+
             <com.github.mikephil.charting.charts.LineChart
                 android:id="@+id/chart"
                 android:layout_width="match_parent"
                 android:layout_height="400dp"
                 android:background="@android:color/background_light" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_store_products"
+            <TextView
                 android:layout_width="match_parent"
-                android:layout_height="458dp" />
-        </LinearLayout>
-    </ScrollView>
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/managerAddProductBtn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:layout_margin="16dp"
-        android:background="@drawable/search_bt_background"
-        android:text="Thêm sản phẩm mới"
-        android:textAllCaps="false"
-        android:textColor="#ffffff"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_weight="1.5">
+                android:layout_height="wrap_content"
+                android:text="Thống kê"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:padding="16dp"/>
 
-    </androidx.appcompat.widget.AppCompatButton>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_store_statistic"
+                android:layout_width="match_parent"
+                android:layout_height="500dp" />
+
+        </LinearLayout>
+
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
