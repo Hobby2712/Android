@@ -52,8 +52,10 @@
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/ivProfile"
-            android:layout_width="match_parent"
+            android:layout_width="125dp"
             android:layout_height="125dp"
+            android:layout_marginStart="140dp"
+            android:background="@drawable/btn_back_background"
             android:layout_marginTop="16dp"
             android:src="@drawable/logo" />
 
@@ -165,11 +167,20 @@
             android:textColor="@color/white" />
 
         <Button
+            android:id="@+id/btnChangePass"
+            android:layout_width="283dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp"
+            android:text="Change Password"
+            android:textColor="@color/white" />
+
+        <Button
             android:id="@+id/buttonLogout"
             android:layout_width="283dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="20dp"
             android:text="LogOut"
             android:textColor="@color/white"/>
 

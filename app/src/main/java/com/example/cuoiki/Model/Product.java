@@ -122,6 +122,21 @@ public class Product implements Serializable {
         this.sold = sold;
     }
 
+    public Product() {
+    }
+
+    public Product(int id, String name, int price, String image, String description, int quantity, int cateId, int storeId, int sold) {
+        this.id = id;
+        this.name = name;
+        this.price = price;
+        this.image = image;
+        this.description = description;
+        this.quantity = quantity;
+        this.cateId = cateId;
+        this.storeId = storeId;
+        this.sold = sold;
+    }
+
     public String Currency(int price) {
         Locale localeVN = new Locale("vi", "VN");
         NumberFormat vn = NumberFormat.getInstance(localeVN);

@@ -5,6 +5,7 @@ import com.example.cuoiki.Model.User;
 import com.example.cuoiki.Response.Category2Response;
 import com.example.cuoiki.Response.CategoryResponse;
 import com.example.cuoiki.Response.OneProductResponse;
+import com.example.cuoiki.Response.OrderResponse;
 import com.example.cuoiki.Response.ProductResponse;
 import com.example.cuoiki.Response.SignUpResponse;
 import com.example.cuoiki.Response.StoreResponse;
@@ -33,8 +34,8 @@ import retrofit2.http.Query;
 
 public interface APIService {
 
-    //public static final String BASE_URL2="http://192.168.43.18:8080/Web/api/v1/";
-    public static final String BASE_URL2="http://192.168.1.20:8080/Web/api/v1/";
+    public static final String BASE_URL2="http://192.168.43.18:8080/Web/api/v1/";
+    //public static final String BASE_URL2="http://192.168.1.20:8080/Web/api/v1/";
     Gson gson = new GsonBuilder().setDateFormat("yyyy MM d HH:mm:ss").create();
 
     OkHttpClient.Builder httpClient = new OkHttpClient.Builder()
@@ -73,6 +74,9 @@ public interface APIService {
     @GET("products")
     Call<ProductResponse> getProductByStoreId(@Query("store") int storeId);
 
+    @GET("orders")
+    Call<OrderResponse> getOrders(@Query("user") int userId);
+
     @GET("products")
     Call<ProductResponse> searchStoreProductByName(@Query("store") int storeId,
                                                    @Query("search") String search);
@@ -95,6 +99,18 @@ public interface APIService {
     @FormUrlEncoded
     @POST("verifyForgotPass")
     Call<VerifyResponse> forgotPass(@Field("email") String email, @Field("newpass") String newpassword, @Field("otp") String otp, @Field("otpSend") String otpSend);
+
+    @FormUrlEncoded
+    @POST("changePassword")
+    Call<VerifyResponse> changePass(@Field("id") int id, @Field("oldPass") String oldPass,@Field("newPass") String newPass,@Field("repeatNewPass") String repeatNewPass);
+
+    @FormUrlEncoded
+    @POST("verifyChangePass")
+    Call<VerifyResponse> verifyChangePass(@Field("id") int id, @Field("pass") String newpassword, @Field("otp") String otp, @Field("otpSend") String otpSend);
+
+    @FormUrlEncoded
+    @POST("profile")
+    Call<VerifyResponse> editProfile(@Field("id") int id, @Field("name") String name, @Field("address") String address, @Field("phone") String phone);
 
     @POST("updateimages.php")
     @Multipart
@@ -142,7 +158,5 @@ public interface APIService {
 
     @GET("stores")
     Call<StoreResponse> getStoreInfoByUserId(@Query("user") int userId);
-    @FormUrlEncoded
-    @POST("newmealdetail.php")
-    Call<ProductResponse> getProduct(@Field("id") String id);
+
 }

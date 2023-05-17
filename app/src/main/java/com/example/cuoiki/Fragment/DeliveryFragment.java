@@ -9,10 +9,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.example.cuoiki.databinding.FragmentNeworderBinding;
+import com.example.cuoiki.R;
 
 public class DeliveryFragment extends Fragment {
-    FragmentNeworderBinding binding;
 
     public DeliveryFragment() {
     }
@@ -26,9 +25,9 @@ public class DeliveryFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater
             , @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        binding = FragmentNeworderBinding.inflate(inflater, container, false);
-        //recyclerView
-        return binding.getRoot();
+        View view = inflater.inflate(R.layout.viewholder_product, container, false);
+        //textView = view.findViewById(R.id.textView);
+        //textView.setText("Hello world!");
+        return view;
     }
 }

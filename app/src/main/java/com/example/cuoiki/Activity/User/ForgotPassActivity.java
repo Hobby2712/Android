@@ -64,7 +64,7 @@ public class ForgotPassActivity extends AppCompatActivity {
         email = etEmail.getText().toString().trim();
 
         if (TextUtils.isEmpty(email)){
-            etEmail.setError("Please enter your username");
+            etEmail.setError("Please enter your email");
             etEmail.requestFocus();
             return;
         }
