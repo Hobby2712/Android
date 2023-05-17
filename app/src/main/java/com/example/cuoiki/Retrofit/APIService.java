@@ -4,6 +4,7 @@ import com.example.cuoiki.Model.Categories;
 import com.example.cuoiki.Model.User;
 import com.example.cuoiki.Response.Category2Response;
 import com.example.cuoiki.Response.CategoryResponse;
+import com.example.cuoiki.Response.ChartResponse;
 import com.example.cuoiki.Response.OneProductResponse;
 import com.example.cuoiki.Response.OrderResponse;
 import com.example.cuoiki.Response.ProductResponse;
@@ -164,5 +165,7 @@ public interface APIService {
 
     @GET("stores")
     Call<StoreResponse> getStoreInfoByUserId(@Query("user") int userId);
+    @GET("statistic/chart")
+    Call<ChartResponse> getChart(@Query("store") int storeId);
 
 }

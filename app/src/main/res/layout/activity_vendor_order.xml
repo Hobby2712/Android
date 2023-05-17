@@ -22,7 +22,7 @@
                 android:gravity="center"
                 android:minHeight="?actionBarSize"
                 android:padding="16dp"
-                app:title="Vendor"
+                app:title="Xử Lý Đơn Hàng"
                 android:textAppearance="@style/TextAppearance.Widget.AppCompat.Toolbar.Title" />
             <com.google.android.material.tabs.TabLayout
                 android:id="@+id/tabLayout"
