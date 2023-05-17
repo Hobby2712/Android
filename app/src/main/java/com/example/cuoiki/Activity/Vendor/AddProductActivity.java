@@ -202,6 +202,9 @@ public class AddProductActivity extends AppCompatActivity {
                 if(response.isSuccessful()){
                     if(!response.body().isError()){
                         Toast.makeText(AddProductActivity.this, "Thêm sản phẩm thành công", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(AddProductActivity.this, ManageProductActivity.class);
+                        startActivity(intent);
+                        finish();
                     }
                 }
 

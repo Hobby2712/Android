@@ -50,7 +50,7 @@ public class ProductStoreAdapter extends RecyclerView.Adapter<ProductStoreAdapte
         holder.productPrice.setText(String.valueOf(foodDomains.get(position).getPrice()) + "đ");
 
         Glide.with(context)
-                .load(contants.ROOT_URL+"Web"+foodDomains.get(position).getImage())
+                .load(contants.ROOT_URL+"Web/image?fname="+foodDomains.get(position).getImage())
                 .into(holder.productImg);
         holder.btnEdit.setOnClickListener(new View.OnClickListener() {
             @Override

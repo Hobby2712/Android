@@ -146,6 +146,7 @@ public interface APIService {
                                            @Part("storeId") RequestBody storeId,
                                            @Part MultipartBody.Part image);
 
+    @Multipart
     @PUT("products/{id}")
     Call<OneProductResponse> editStoreProductWithoutImage(@Path("id") long id,
                                                           @Part("name") RequestBody pName,
