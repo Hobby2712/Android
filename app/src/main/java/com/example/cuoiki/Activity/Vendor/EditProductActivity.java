@@ -76,11 +76,8 @@ public class EditProductActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vendor_editp);
-
         anhXa();
         getListCategories2();
-
-
         loadProductDetails();
         Log.e("edit product", "productid: " + getIntent().getSerializableExtra("id"));
         Log.e("edit product", "storeid: " + SharedPrefManager.getInstance(this).getStoreInfo());
