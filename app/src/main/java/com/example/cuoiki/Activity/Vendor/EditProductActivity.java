@@ -60,7 +60,7 @@ public class EditProductActivity extends AppCompatActivity {
     EditText pName, pPrice, description, quantity;
     TextView btnChooseImg;
     ImageView imgUpload, btnBack;
-    Button btnAdd;
+    Button btnEdit;
     Uri mUri;
     AutoCompleteTextView categoriesList;
     ArrayAdapter<KeyValueCategories> adapterItems;
@@ -93,7 +93,7 @@ public class EditProductActivity extends AppCompatActivity {
             }
         });
 
-        btnAdd.setOnClickListener(new View.OnClickListener() {
+        btnEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(mUri != null && categorySelected != null){
@@ -245,7 +245,7 @@ public class EditProductActivity extends AppCompatActivity {
         imgUpload = findViewById(R.id.ivEditUploaded);
         categoriesList = findViewById(R.id.category_choose);
         btnBack = findViewById(R.id.iv_edit_back);
-        btnAdd = findViewById(R.id.editProductBtn);
+        btnEdit = findViewById(R.id.editProductBtn);
     }
     public static String[] storage_permissions = {
             Manifest.permission.WRITE_EXTERNAL_STORAGE,
