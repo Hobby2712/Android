@@ -65,6 +65,8 @@ public interface APIService {
     @GET("best-seller")
     Call<ProductResponse> getBestSeller();
 
+    @GET("orders")
+    Call<OrderResponse> changeStatus(@Query("id") int id, @Query("status") int status);
     @GET("products/{id}")
     Call<OneProductResponse> getProductById(@Path("id") String id);
 
@@ -76,6 +78,9 @@ public interface APIService {
 
     @GET("orders")
     Call<OrderResponse> getOrders(@Query("user") int userId);
+
+    @GET("orders")
+    Call<OrderResponse> getShipperOrders(@Query("status") String status);
 
     @GET("products")
     Call<ProductResponse> searchStoreProductByName(@Query("store") int storeId,
