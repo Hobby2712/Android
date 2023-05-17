@@ -42,8 +42,8 @@ public class OrderActivity extends AppCompatActivity {
 
         binding.tabLayout.addTab(binding.tabLayout.newTab().setText("Xác nhận"));
         binding.tabLayout.addTab(binding.tabLayout.newTab().setText("Lấy hàng"));
-        binding.tabLayout.addTab(binding.tabLayout.newTab().setText("Dang giao"));
-        binding.tabLayout.addTab(binding.tabLayout.newTab().setText("Đánh giá"));
+        binding.tabLayout.addTab(binding.tabLayout.newTab().setText("Đang giao"));
+        binding.tabLayout.addTab(binding.tabLayout.newTab().setText("Đã giao"));
         binding.tabLayout.addTab(binding.tabLayout.newTab().setText("Hủy"));
 
         FragmentManager fragmentManager = getSupportFragmentManager();
