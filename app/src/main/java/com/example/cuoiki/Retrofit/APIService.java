@@ -10,6 +10,7 @@ import com.example.cuoiki.Response.OrderResponse;
 import com.example.cuoiki.Response.ProductResponse;
 import com.example.cuoiki.Response.SignUpResponse;
 import com.example.cuoiki.Response.StoreResponse;
+import com.example.cuoiki.Response.ThongKeResponse;
 import com.example.cuoiki.Response.VerifyResponse;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -168,4 +169,6 @@ public interface APIService {
     @GET("statistic/chart")
     Call<ChartResponse> getChart(@Query("store") int storeId);
 
+    @GET("statistic")
+    Call<ThongKeResponse> getStoreStatistic(@Query("store") int storeId);
 }

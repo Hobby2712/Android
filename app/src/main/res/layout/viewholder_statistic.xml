@@ -15,7 +15,7 @@
 
 
         <TextView
-            android:id="@+id/tvUser"
+            android:id="@+id/tvStatUser"
             android:layout_width="50dp"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -26,17 +26,17 @@
 
 
         <TextView
-            android:id="@+id/tvAddress"
+            android:id="@+id/tvStatAddress"
             android:layout_width="50dp"
             android:layout_height="wrap_content"
-            android:text="Hồ Chí minh"
+            android:text="Hồ Chí Minh"
             android:layout_marginStart="5dp"
             android:gravity="center"
             android:textColor="#747271"
             android:textSize="17sp"
             android:textStyle="italic" />
         <TextView
-            android:id="@+id/tvProduct"
+            android:id="@+id/tvStatProduct"
             android:layout_width="60dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
@@ -46,7 +46,7 @@
             android:textSize="17sp"
             android:textStyle="italic" />
         <TextView
-            android:id="@+id/tvQuantity"
+            android:id="@+id/tvStatQuantity"
             android:layout_width="48dp"
             android:layout_marginStart="5dp"
             android:layout_height="wrap_content"
@@ -57,7 +57,7 @@
             android:textStyle="italic" />
 
         <TextView
-            android:id="@+id/tvDate"
+            android:id="@+id/tvStatDate"
             android:layout_width="90dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
@@ -69,7 +69,7 @@
 
 
         <TextView
-            android:id="@+id/tvPrice"
+            android:id="@+id/tvStatPrice"
             android:layout_width="85dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"

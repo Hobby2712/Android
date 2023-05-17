@@ -10,9 +10,15 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.cuoiki.Adapter.ProductStoreAdapter;
+import com.example.cuoiki.Adapter.StoreStatisticAdapter;
+import com.example.cuoiki.Model.ThongKe;
 import com.example.cuoiki.R;
 import com.example.cuoiki.Response.ChartResponse;
+import com.example.cuoiki.Response.ThongKeResponse;
 import com.example.cuoiki.Retrofit.APIService;
 import com.example.cuoiki.Retrofit.RetrofitClient;
 import com.example.cuoiki.SharedPrefManager.SharedPrefManager;
@@ -35,12 +41,18 @@ import retrofit2.Response;
 public class ThongKeActivity extends AppCompatActivity {
 
     private ActivityVendorStatisticBinding binding;
+    private StoreStatisticAdapter adapter;
+    private RecyclerView listStatistic;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityVendorStatisticBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         setSupportActionBar(binding.toolBar);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        listStatistic = findViewById(R.id.rv_store_statistic);
+        listStatistic.setLayoutManager(linearLayoutManager);
         drawChart();
+        recycleViewStatistic();
     }
 
     private void drawChart(){
@@ -79,9 +91,35 @@ public class ThongKeActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<ChartResponse> call, Throwable t) {
-                Log.e( "Chart", "gọi ap thất bại");
+                Log.e( "Chart", "gọi api thất bại");
             }
         });
+    }
+
+    private void recycleViewStatistic(){
+        RetrofitClient.getInstance()
+                .getRetrofit(contants.URL_PRODUCT2)
+                .create(APIService.class)
+                .getStoreStatistic(SharedPrefManager.getInstance(this).getStoreInfo().getId())
+                .enqueue(new Callback<ThongKeResponse>() {
+                    @Override
+                    public void onResponse(Call<ThongKeResponse> call, Response<ThongKeResponse> response) {
+                        if (response.isSuccessful()) {
+                            List<ThongKe> thongKeList = response.body().getData().getStatistic();
+                            adapter = new StoreStatisticAdapter(thongKeList, ThongKeActivity.this);
+                            listStatistic.setAdapter(adapter);
+                            Log.e( "Thống kê", "Thành công");
+                            //Log.e( "Thống kê", thongKeList.toString());
+                        }else {
+                            Log.e( "Thống kê", "Có lỗi");
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<ThongKeResponse> call, Throwable t) {
+                        Log.e( "Thống kê", "gọi api thất bại");
+                    }
+                });
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
