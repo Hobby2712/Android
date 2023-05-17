@@ -1,14 +1,11 @@
 package com.example.cuoiki.Model;
 
-import com.example.cuoiki.Retrofit.APIService;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
 public class Order implements Serializable {
-    APIService apiService;
-
     @SerializedName("id")
     @Expose
     private int id;
@@ -28,10 +25,6 @@ public class Order implements Serializable {
     @SerializedName("totalprice")
     @Expose
     private int totalprice;
-
-    @SerializedName("cateId")
-    @Expose
-    private int cateId;
 
     @SerializedName("status")
     @Expose
@@ -57,9 +50,6 @@ public class Order implements Serializable {
         return totalprice;
     }
 
-    public int getCateId() {
-        return cateId;
-    }
 
     public int getStatus() {
         return status;
@@ -83,10 +73,6 @@ public class Order implements Serializable {
 
     public void setTotalprice(int totalprice) {
         this.totalprice = totalprice;
-    }
-
-    public void setCateId(int cateId) {
-        this.cateId = cateId;
     }
 
     public void setStatus(int status) {

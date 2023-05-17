@@ -58,8 +58,8 @@ public class MainActivity extends AppCompatActivity{
         ivSearch = findViewById(R.id.ivSearch);
         tvQuantity = findViewById(R.id.tvQuantity);
 
-//        int quantity = ProductDatabase.getInstance(this).productDao().getAll().size();
-//        tvQuantity.setText(String.valueOf(quantity));
+        int quantity = ProductDatabase.getInstance(this).productDao().getAll().size();
+        tvQuantity.setText(String.valueOf(quantity));
 
         ivSearch.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -129,7 +129,7 @@ public class MainActivity extends AppCompatActivity{
         orderBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, MainActivity.class));
+                startActivity(new Intent(MainActivity.this,OrderActivity.class));
             }
         });
     }
