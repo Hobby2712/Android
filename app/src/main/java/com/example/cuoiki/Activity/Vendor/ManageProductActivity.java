@@ -9,6 +9,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -49,6 +51,8 @@ public class ManageProductActivity extends AppCompatActivity {
     int storeId = -1;
     private List<Product> productList;
     Button btnAddProduct;
+    EditText searchBar;
+    TextView btnSearch;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,6 +75,48 @@ public class ManageProductActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        searchBar = findViewById(R.id.etManagerSearchP);
+        btnSearch = findViewById(R.id.btnManagerSearchP);
+        btnSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                recyclerViewSearchStoreProducts(searchBar.getText().toString(), SharedPrefManager.getInstance(getApplicationContext()).getStoreInfo().getId());
+            }
+        });
+    }
+
+    private void recyclerViewSearchStoreProducts(String txtSearch, int storeId) {
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        listStoreProducts = findViewById(R.id.rv_store_products);
+        listStoreProducts.setLayoutManager(linearLayoutManager);
+        //Get API
+        RetrofitClient.getInstance()
+                .getRetrofit(contants.URL_PRODUCT2)
+                .create(APIService.class)
+                .searchStoreProductByName(storeId, txtSearch)
+                .enqueue(new Callback<ProductResponse>() {
+                    @Override
+                    public void onResponse(Call<ProductResponse> call, Response<ProductResponse> response) {
+                        if(response.isSuccessful()){
+                            productList = response.body().getData().getProducts();
+                            adapter = new ProductStoreAdapter(productList, ManageProductActivity.this, new ProductStoreAdapter.iClickListener() {
+                                @Override
+                                public void deleteProduct(long productId) {
+                                    clickDeleteProduct(productId);
+                                }
+                            });
+                            listStoreProducts.setAdapter(adapter);
+                        }else{
+                            int statusCode=response.code();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<ProductResponse> call, Throwable t) {
+                        Log.d("logg",t.getMessage());
+                    }
+                });
     }
 
     private void getStore(int userId){

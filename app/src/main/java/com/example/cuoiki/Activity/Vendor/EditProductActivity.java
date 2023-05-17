@@ -30,8 +30,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.bumptech.glide.Glide;
 import com.example.cuoiki.Model.Categories;
 import com.example.cuoiki.Model.KeyValueCategories;
+import com.example.cuoiki.Model.Product;
 import com.example.cuoiki.Model.Store;
 import com.example.cuoiki.R;
 import com.example.cuoiki.Response.Category2Response;
@@ -66,6 +68,7 @@ public class EditProductActivity extends AppCompatActivity {
     ArrayAdapter<KeyValueCategories> adapterItems;
     private static final int REQUEST_CODE = 1;
     String categorySelected = null;
+    private String productId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +77,7 @@ public class EditProductActivity extends AppCompatActivity {
 
         anhXa();
         getListCategories2();
+        loadProductDetails();
         adapterItems = new ArrayAdapter<>(this, R.layout.list_item, categories);
         categoriesList.setAdapter(adapterItems);
         Log.e("edit product", "productid: " + getIntent().getSerializableExtra("id"));
@@ -112,6 +116,37 @@ public class EditProductActivity extends AppCompatActivity {
                 Intent intent = new Intent(EditProductActivity.this, ManageProductActivity.class);
                 finish();
                 startActivity(intent);
+            }
+        });
+    }
+
+    private void loadProductDetails() {
+        productId = (String) getIntent().getSerializableExtra("id");
+        Log.e("Product detail id:", productId + "====================");
+
+        RetrofitClient.getInstance()
+                .getRetrofit(contants.URL_PRODUCT2)
+                .create(APIService.class)
+                .getProductById(productId)
+                .enqueue(new Callback<OneProductResponse>() {
+            @Override
+            public void onResponse(Call<OneProductResponse> call, Response<OneProductResponse> response) {
+                if(response.isSuccessful()){
+                    Product product = response.body().getData().get1Product();
+                    Log.e("Product detail name:", product.getName() + "====================");
+                    pName.setText(product.getName());
+                    pPrice.setText(product.Currency(product.getPrice()));
+                    description.setText(product.getDescription());
+                    quantity.setText(String.valueOf(product.getQuantity()));
+                    categoriesList.setSelection(product.getCateId());
+                    Glide.with(getApplicationContext()).load(contants.ROOT_URL+"Web"+product.getImage()).into(imgUpload);
+                }
+            }
+
+
+            @Override
+            public void onFailure(Call<OneProductResponse> call, Throwable t) {
+                Log.d("logg fail",t.getMessage());
             }
         });
     }
