@@ -96,6 +96,18 @@ public interface APIService {
     @POST("verifyForgotPass")
     Call<VerifyResponse> forgotPass(@Field("email") String email, @Field("newpass") String newpassword, @Field("otp") String otp, @Field("otpSend") String otpSend);
 
+    @FormUrlEncoded
+    @POST("changePassword")
+    Call<VerifyResponse> changePass(@Field("id") int id, @Field("oldPass") String oldPass,@Field("newPass") String newPass,@Field("repeatNewPass") String repeatNewPass);
+
+    @FormUrlEncoded
+    @POST("verifyChangePass")
+    Call<VerifyResponse> verifyChangePass(@Field("id") int id, @Field("pass") String newpassword, @Field("otp") String otp, @Field("otpSend") String otpSend);
+
+    @FormUrlEncoded
+    @POST("profile")
+    Call<VerifyResponse> editProfile(@Field("id") int id, @Field("name") String name, @Field("address") String address, @Field("phone") String phone);
+
     @POST("updateimages.php")
     @Multipart
     Call<ProductResponse> upload1(@Part("username") RequestBody username, @Part MultipartBody.Part avatar);

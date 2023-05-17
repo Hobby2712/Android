@@ -17,7 +17,7 @@ import com.example.cuoiki.Utils.contants;
 
 public class ProfileActivity extends AppCompatActivity implements View.OnClickListener {
     TextView name, email, phone, address;
-    Button btnLogout, btnEdit;
+    Button btnLogout, btnEdit, btnChangePass;
     ImageView imageViewprofile, iv_back;
 
     @Override
@@ -42,15 +42,22 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
             address = findViewById(R.id.textViewAddress);
             btnLogout = findViewById(R.id.buttonLogout);
             btnEdit = findViewById(R.id.btnEdit);
+            btnChangePass = findViewById(R.id.btnChangePass);
             imageViewprofile = findViewById(R.id.ivProfile);
             User user = SharedPrefManager.getInstance(this).getUser();
             name.setText(String.valueOf(user.getFullName()));
             email.setText(user.getEmail());
             phone.setText(user.getPhone());
             address.setText(user.getAddress());
-            Glide.with(getApplicationContext()).load(contants.ROOT_URL+"Web"+user.getImages()).into(imageViewprofile);
+            if(!user.getImages().isEmpty()) {
+                Glide.with(getApplicationContext()).load(contants.ROOT_URL + "Web" + user.getImages()).into(imageViewprofile);
+            }
+            else{
+                Glide.with(getApplicationContext()).load(R.drawable.bottom_profile).into(imageViewprofile);
+            }
             btnLogout.setOnClickListener(this);
             btnEdit.setOnClickListener(this);
+            btnChangePass.setOnClickListener(this);
         }
         else{
             Intent intent = new Intent(ProfileActivity.this, MainActivity.class);
@@ -65,6 +72,9 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
             SharedPrefManager.getInstance(getApplicationContext()).logout();
         } else if (view.equals(btnEdit)) {
             startActivity(new Intent(ProfileActivity.this, EditProfileActivity.class));
+        }
+        else if (view.equals(btnChangePass)){
+            startActivity(new Intent(ProfileActivity.this, ChangePassActivity.class));
         }
     }
 }

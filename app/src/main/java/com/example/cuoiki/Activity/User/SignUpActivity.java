@@ -48,6 +48,11 @@ public class SignUpActivity extends AppCompatActivity {
         final String rePassword = etRePass.getText().toString().trim();
         final String email = etEmail.getText().toString().trim();
 
+        if (TextUtils.isEmpty(email)) {
+            etEmail.setError("Please enter email");
+            etEmail.requestFocus();
+            return;
+        }
         if (TextUtils.isEmpty(username)) {
             etUsername.setError("Please enter username");
             etUsername.requestFocus();
@@ -58,9 +63,9 @@ public class SignUpActivity extends AppCompatActivity {
             etPassword.requestFocus();
             return;
         }
-        if (TextUtils.isEmpty(email)) {
-            etEmail.setError("Please enter email");
-            etEmail.requestFocus();
+        if (TextUtils.isEmpty(rePassword)) {
+            etRePass.setError("Please enter repeat password");
+            etRePass.requestFocus();
             return;
         }
         if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {

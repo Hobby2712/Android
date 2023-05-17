@@ -76,7 +76,12 @@ public class MainActivity extends AppCompatActivity{
             avatar = findViewById(R.id.ivAvatar);
 
             userName.setText("Hi "+ user.getUserName());
-            Glide.with(getApplicationContext()).load(contants.ROOT_URL+"Web"+user.getImages()).into(avatar);
+            if(!user.getImages().isEmpty()) {
+                Glide.with(getApplicationContext()).load(contants.ROOT_URL + "Web" + user.getImages()).into(avatar);
+            }
+            else{
+                Glide.with(getApplicationContext()).load(R.drawable.bottom_profile).into(avatar);
+            }
         }
         recyclerViewCategory();
         System.out.println("=================================");

@@ -3,11 +3,13 @@ package com.example.cuoiki.Model;
 import java.io.Serializable;
 
 public class User implements Serializable {
-    private int id;
+    private int id, role;
     private String userName, fullName, email, address, phone, images;
 
-    public User(int id, String userName, String fullName, String email, String address, String phone, String images) {
+
+    public User(int id, int role, String userName, String fullName, String email, String address, String phone, String images) {
         this.id = id;
+        this.role = role;
         this.userName = userName;
         this.fullName = fullName;
         this.email = email;
@@ -44,6 +46,10 @@ public class User implements Serializable {
         return images;
     }
 
+    public int getRole() {
+        return role;
+    }
+
     public void setId(int id) {
         this.id = id;
     }
@@ -72,10 +78,15 @@ public class User implements Serializable {
         this.images = images;
     }
 
+    public void setRole(int role) {
+        this.role = role;
+    }
+
     @Override
     public String toString() {
         return "User{" +
                 "id=" + id +
+                ", role=" + role +
                 ", userName='" + userName + '\'' +
                 ", fullName='" + fullName + '\'' +
                 ", email='" + email + '\'' +

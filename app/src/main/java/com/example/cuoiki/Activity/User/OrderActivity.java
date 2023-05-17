@@ -77,9 +77,6 @@ public class OrderActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
         switch (id) {
-            case R.id.menuSearch:
-                Toast.makeText(this, "Bạn đang chọn search", Toast.LENGTH_SHORT).show();
-                break;
             case R.id.menuNewGroup:
                 Toast.makeText(this, "Bạn đang chọn more", Toast.LENGTH_SHORT).show();
                 break;
