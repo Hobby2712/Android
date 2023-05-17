@@ -34,6 +34,13 @@ import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface APIService {
+<<<<<<< HEAD
+=======
+    
+    public static final String BASE_URL2="http://192.168.43.18:8080/Web/api/v1/";
+    //public static final String BASE_URL2="http://192.168.1.20:8080/Web/api/v1/";
+    //public static final String BASE_URL2="http://192.168.6.165:8080/Web/api/v1/";
+>>>>>>> 0e074ff (lát)
 
     public static final String BASE_URL2="http://192.168.43.18:8080/Web/api/v1/";
     //public static final String BASE_URL2="http://192.168.1.20:8080/Web/api/v1/";
@@ -81,7 +88,14 @@ public interface APIService {
     Call<OrderResponse> getOrders(@Query("user") int userId);
 
     @GET("orders")
+<<<<<<< HEAD
     Call<OrderResponse> getShipperOrders(@Query("status") String status);
+=======
+    Call<OrderResponse> getOrdersStore(@Query("store") int storeId);
+
+    @GET("orders")
+    Call<OrderResponse> changeStatus(@Query("id") int id, @Query("status") int status);
+>>>>>>> 0e074ff (lát)
 
     @GET("products")
     Call<ProductResponse> searchStoreProductByName(@Query("store") int storeId,

@@ -1,10 +1,11 @@
 package com.example.cuoiki.Adapter;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,27 +18,30 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.cuoiki.Activity.User.CartActivity;
+import com.example.cuoiki.Activity.User.OrderActivity;
 import com.example.cuoiki.Model.Order;
-import com.example.cuoiki.Model.Product;
 import com.example.cuoiki.R;
-import com.example.cuoiki.RoomDatabase.ProductDatabase;
-import com.example.cuoiki.RoomDatabase.RoomProduct;
+import com.example.cuoiki.Response.OrderResponse;
+import com.example.cuoiki.Retrofit.APIService;
+import com.example.cuoiki.Retrofit.RetrofitClient;
 import com.example.cuoiki.Utils.contants;
-
-import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserOrderDaGAdapter extends RecyclerView.Adapter<UserOrderDaGAdapter.ViewHolder> {
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+public class VendorOrderDaGAdapter extends RecyclerView.Adapter<VendorOrderDaGAdapter.ViewHolder> {
     List<Order> orders, check;
     Context context;
+    APIService apiService;
 
-    public UserOrderDaGAdapter(List<Order> check, Context context) {
+    public VendorOrderDaGAdapter(List<Order> check, Context context) {
         List<Order> orders = new ArrayList<>();
         for(Order i: check){
-            if(i.getStatus()==4){
+            if(i.getStatus()==4 || i.getStatus()==8){
                 orders.add(i);
             }
         }
@@ -60,47 +64,21 @@ public class UserOrderDaGAdapter extends RecyclerView.Adapter<UserOrderDaGAdapte
         holder.name.setText(orders.get(position).getP().getName());
         holder.price.setText(String.valueOf(order.getP().Currency(orders.get(position).getP().getPrice()*orders.get(position).getCount())));
         holder.quantity.setText(String.valueOf(orders.get(position).getCount()));
-        holder.status.setText("Đã giao");
+        if(orders.get(position).getStatus()==4){
+            holder.status.setText("Đã giao");
+        }
+        else{
+            holder.status.setText("Đã nhận hàng");
+        }
         holder.status.setTextColor(Color.BLACK);
-        Toast.makeText(holder.itemView.getContext(), "Đay la paper 1", Toast.LENGTH_SHORT).show();
-
-        holder.tvCancel.setVisibility(View.INVISIBLE);
-
         Glide.with(context)
                 .load(contants.ROOT_URL+"Web"+orders.get(position).getP().getImage())
                 .into(holder.ivImage);
-        holder.tvBuy.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (position != RecyclerView.NO_POSITION) {
-                    Order order = orders.get(position);
-                    Product product = order.getP();
-                    RoomProduct products = new RoomProduct(product.getId(), product.getName(),product.getImage(),1, product.getPrice());
-                    RoomProduct list = ProductDatabase.getInstance(holder.itemView.getContext()).productDao().checkProduct(product.getId());
-                    int check = 0;
-                    if(list!=null){
-                        check = list.getQuantity();
-                    }
-                    if(check>0){
-                        Toast.makeText(holder.itemView.getContext(), "Update", Toast.LENGTH_SHORT).show();
-                        products.setQuantity(check+1);
-                        ProductDatabase.getInstance(holder.itemView.getContext()).productDao().update(products);
-                        Intent intent = new Intent(holder.itemView.getContext(), CartActivity.class);
-                        holder.itemView.getContext().startActivity(intent);
-                        return;
-                    }
-                    //add vào room
-                    ProductDatabase.getInstance(holder.itemView.getContext()).productDao().insertAll(products);
-                    Toast.makeText(holder.itemView.getContext(), "Thêm product thành công", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(holder.itemView.getContext(), CartActivity.class);
-                    holder.itemView.getContext().startActivity(intent);
-                }
-                Toast.makeText(context,"Bạn đã chọn product"+holder.name.getText().toString(), Toast.LENGTH_SHORT).show();
-            }
-        });
+
+        holder.tvCancel.setVisibility(View.INVISIBLE);
+        holder.tvBuy.setVisibility(View.INVISIBLE);
+
     }
-
-
 
 
     @Override
@@ -128,5 +106,4 @@ public class UserOrderDaGAdapter extends RecyclerView.Adapter<UserOrderDaGAdapte
             tvBuy = itemView.findViewById(R.id.tvBuy);
         }
     }
-
 }
