@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <group
+        android:id="@+id/menu_More">
+        <item android:id="@+id/menuStatistic"
+            android:title="Thống kê doanh thu" />
+        <item android:id="@+id/menuProductManage"
+            android:title="Quản lý sản phẩm" />
+        <item android:id="@+id/menuOrderManage"
+            android:title="Quản lý đơn hàng" />
+        <item android:id="@+id/menuLogOut"
+            android:title="Đăng xuất" />
+    </group>
+</menu>

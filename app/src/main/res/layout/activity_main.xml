@@ -299,6 +299,18 @@
             </LinearLayout>
         </com.google.android.material.bottomappbar.BottomAppBar>
 
+        <TextView
+            android:id="@+id/tvQuantity"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="220dp"
+            android:layout_weight="12"
+            android:background="@drawable/btn_back_background"
+            android:gravity="center"
+            android:text="12"
+            android:textColor="#7fad39"
+            android:textSize="12sp"
+            android:textStyle="bold|italic" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/cardBtn"

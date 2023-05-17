@@ -110,6 +110,15 @@ public class AddProductActivity extends AppCompatActivity {
                 }
             }
         });
+
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(AddProductActivity.this, ManageProductActivity.class);
+                finish();
+                startActivity(intent);
+            }
+        });
     }
 
     private void uploadImage() {

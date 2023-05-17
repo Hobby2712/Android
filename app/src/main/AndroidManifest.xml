@@ -23,6 +23,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CuoiKi"
         tools:targetApi="31">
+        <activity android:name=".Activity.User.SignUpActivity" ></activity>
+        <activity android:name=".Activity.User.ForgotPassActivity" ></activity>
+        <activity android:name=".Activity.User.VerifySignUpActivity" ></activity>
+        <activity android:name=".Activity.User.VerifyForgotPassActivity" ></activity>
         <activity android:name=".Activity.User.MainActivity" ></activity>
         <activity android:name=".Activity.User.CartActivity" ></activity>
         <activity android:name=".Activity.User.ProductDetailActivity" ></activity>
@@ -31,10 +35,13 @@
         <activity android:name=".Activity.User.ProfileActivity" ></activity>
         <activity android:name=".Activity.User.EditProfileActivity" ></activity>
         <activity android:name=".Activity.User.ProductSearchActivity" ></activity>
+        <activity android:name=".Activity.User.CheckoutActivity" ></activity>
+
         <activity android:name=".Activity.Vendor.AddProductActivity" ></activity>
         <activity android:name=".Activity.Vendor.ManageProductActivity" ></activity>
         <activity android:name=".Activity.Vendor.EditProductActivity" ></activity>
         <activity android:name=".Activity.Vendor.ThongKeActivity" ></activity>
+        <activity android:name=".Activity.Vendor.ManageOrderActivity" ></activity>
         <activity
             android:name=".Activity.User.LoginActivity"
             android:exported="true">

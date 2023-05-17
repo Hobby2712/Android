@@ -24,6 +24,7 @@ import com.example.cuoiki.Model.Categories;
 import com.example.cuoiki.Model.Product;
 import com.example.cuoiki.R;
 import com.example.cuoiki.Retrofit.RetrofitClient;
+import com.example.cuoiki.RoomDatabase.ProductDatabase;
 import com.example.cuoiki.SharedPrefManager.SharedPrefManager;
 import com.example.cuoiki.Model.User;
 import com.example.cuoiki.Response.CategoryResponse;
@@ -39,7 +40,7 @@ import retrofit2.Response;
 public class MainActivity extends AppCompatActivity{
     private RecyclerView.Adapter adapter, adapter2;
     private RecyclerView recyclerViewCategoryList, recyclerViewPopularList, recyclerViewBestSellerList;
-    private TextView userName, ivSearch;
+    private TextView userName, ivSearch, tvQuantity;
     private EditText etSearch;
     private ImageView avatar;
     APIService apiService;
@@ -55,6 +56,11 @@ public class MainActivity extends AppCompatActivity{
 
         etSearch = findViewById(R.id.etSearch);
         ivSearch = findViewById(R.id.ivSearch);
+        tvQuantity = findViewById(R.id.tvQuantity);
+
+//        int quantity = ProductDatabase.getInstance(this).productDao().getAll().size();
+//        tvQuantity.setText(String.valueOf(quantity));
+
         ivSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

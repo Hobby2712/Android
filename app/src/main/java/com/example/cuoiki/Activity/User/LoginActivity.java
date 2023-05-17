@@ -1,5 +1,6 @@
 package com.example.cuoiki.Activity.User;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -43,8 +44,8 @@ import retrofit2.Callback;
 
 public class LoginActivity extends AppCompatActivity {
     EditText etname, etPassword;
-    ProgressBar progressBar;
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,6 +69,14 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 finish();
                 startActivity(new Intent(getApplicationContext(), SignUpActivity.class));
+            }
+        });
+
+        findViewById(R.id.tvForgotP).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+                startActivity(new Intent(getApplicationContext(), ForgotPassActivity.class));
             }
         });
     }
@@ -99,13 +108,13 @@ public class LoginActivity extends AppCompatActivity {
                                 Toast.makeText(getApplicationContext(), obj.getString("message"), Toast.LENGTH_SHORT).show();
                                 JSONObject userJson = obj.getJSONObject("data").getJSONObject("user");
                                 User user = new User(
-                                        userJson.getInt("id"),
-                                        userJson.getString("userName"),
-                                        userJson.getString("fullName"),
-                                        userJson.getString("email"),
-                                        userJson.getString("address"),
-                                        userJson.getString("phone"),
-                                        userJson.getString("image")
+                                        userJson.optInt("id"),
+                                        userJson.optString("userName"),
+                                        userJson.optString("fullName"),
+                                        userJson.optString("email"),
+                                        userJson.optString("address"),
+                                        userJson.optString("phone"),
+                                        userJson.optString("image")
                                 );
                                 SharedPrefManager.getInstance(getApplicationContext()).userLogin(user);
                                 finish();

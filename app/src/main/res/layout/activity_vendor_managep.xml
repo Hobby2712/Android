@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:layout_weight="50"
     android:background="#ffffff"
-    tools:context=".Activity.User.CartActivity">
+    tools:context=".Activity.Vendor.ManageProductActivity">
 
     <LinearLayout
         android:id="@+id/header"
@@ -90,5 +90,23 @@
                 android:layout_height="458dp" />
         </LinearLayout>
     </ScrollView>
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/managerAddProductBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_margin="16dp"
+        android:background="@drawable/search_bt_background"
+        android:text="Thêm sản phẩm mới"
+        android:textAllCaps="false"
+        android:textColor="#ffffff"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_weight="1.5">
+
+    </androidx.appcompat.widget.AppCompatButton>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
