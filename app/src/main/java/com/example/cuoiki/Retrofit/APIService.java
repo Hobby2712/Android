@@ -178,6 +178,9 @@ public interface APIService {
 
     @GET("stores")
     Call<StoreResponse> getStoreInfoByUserId(@Query("user") int userId);
+    
+    @GET("statistic/chart")
+    Call<ChartResponse> getChart(@Query("store") int storeId);
 
     @GET("statistic")
     Call<ThongKeResponse> getStoreStatistic(@Query("store") int storeId);
