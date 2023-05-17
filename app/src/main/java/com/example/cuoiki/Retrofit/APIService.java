@@ -6,11 +6,16 @@ import com.example.cuoiki.Response.Category2Response;
 import com.example.cuoiki.Response.CategoryResponse;
 import com.example.cuoiki.Response.OneProductResponse;
 import com.example.cuoiki.Response.ProductResponse;
+import com.example.cuoiki.Response.SignUpResponse;
 import com.example.cuoiki.Response.StoreResponse;
+import com.example.cuoiki.Response.VerifyResponse;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import java.util.concurrent.TimeUnit;
+
 import okhttp3.MultipartBody;
+import okhttp3.OkHttpClient;
 import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Retrofit;
@@ -26,13 +31,20 @@ import retrofit2.http.Query;
 
 public interface APIService {
 
-    public static final String BASE_URL2="http://192.168.0.103:8080/Web/api/v1/";
+    public static final String BASE_URL2="http://192.168.43.18:8080/Web/api/v1/";
     //public static final String BASE_URL2="http://192.168.1.20:8080/Web/api/v1/";
     Gson gson = new GsonBuilder().setDateFormat("yyyy MM d HH:mm:ss").create();
+
+    OkHttpClient.Builder httpClient = new OkHttpClient.Builder()
+            .connectTimeout(1, TimeUnit.MINUTES)
+            .readTimeout(1, TimeUnit.MINUTES)
+            .writeTimeout(1, TimeUnit.MINUTES);
+
 
 
     APIService apiSevice2 = new Retrofit.Builder()
             .baseUrl(BASE_URL2)
+            .client(httpClient.build())
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build().create(APIService.class) ;
     @GET("cate1")
@@ -59,6 +71,21 @@ public interface APIService {
     @FormUrlEncoded
     @POST("login")
     Call<User> login(@Field("user") String username, @Field("pass") String password);
+
+    @FormUrlEncoded
+    @POST("signup")
+    Call<VerifyResponse> signup(@Field("email") String email, @Field("user") String username, @Field("pass") String password, @Field("repass") String repassword);
+    @FormUrlEncoded
+    @POST("verifySignUp")
+    Call<SignUpResponse> verifysignup(@Field("email") String email, @Field("user") String username, @Field("pass") String password, @Field("otp") String otp, @Field("otpSend") String otpSend);
+
+    @FormUrlEncoded
+    @POST("forgotPassword")
+    Call<VerifyResponse> findAccount(@Field("email") String email);
+
+    @FormUrlEncoded
+    @POST("verifyForgotPass")
+    Call<VerifyResponse> forgotPass(@Field("email") String email, @Field("newpass") String newpassword, @Field("otp") String otp, @Field("otpSend") String otpSend);
 
     @POST("updateimages.php")
     @Multipart

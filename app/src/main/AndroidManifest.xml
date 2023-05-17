@@ -23,6 +23,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CuoiKi"
         tools:targetApi="31">
+        <activity android:name=".Activity.User.SignUpActivity" ></activity>
+        <activity android:name=".Activity.User.ForgotPassActivity" ></activity>
+        <activity android:name=".Activity.User.VerifySignUpActivity" ></activity>
+        <activity android:name=".Activity.User.VerifyForgotPassActivity" ></activity>
         <activity android:name=".Activity.User.MainActivity" ></activity>
         <activity android:name=".Activity.User.CartActivity" ></activity>
         <activity android:name=".Activity.User.ProductDetailActivity" ></activity>

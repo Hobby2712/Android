@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activity.User.VerifySignUpActivity">
+    tools:context=".Activity.User.VerifyForgotPassActivity">
 
     <ImageView
         android:id="@+id/imageView"
@@ -78,6 +78,31 @@
             android:ems="10"
             android:hint="Enter OTP..."
             android:inputType="textPersonName"
+            android:paddingStart="20dp"
+            android:textColorHint="#464646" />
+
+        <TextView
+            android:id="@+id/textView23"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:ems="10"
+            android:text="Vui lòng nhập mật khẩu mới"
+            android:textColor="#787673"
+            android:textSize="14sp" />
+        <EditText
+            android:id="@+id/etNewPass"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/edittext_background"
+            android:ems="10"
+            android:hint="Enter New Password..."
+            android:inputType="textPassword"
             android:paddingStart="20dp"
             android:textColorHint="#464646" />
 

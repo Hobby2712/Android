@@ -1,5 +1,6 @@
 package com.example.cuoiki.Activity.User;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -42,8 +43,8 @@ import retrofit2.Callback;
 
 public class LoginActivity extends AppCompatActivity {
     EditText etname, etPassword;
-    ProgressBar progressBar;
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,6 +68,14 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 finish();
                 startActivity(new Intent(getApplicationContext(), SignUpActivity.class));
+            }
+        });
+
+        findViewById(R.id.tvForgotP).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+                startActivity(new Intent(getApplicationContext(), ForgotPassActivity.class));
             }
         });
     }

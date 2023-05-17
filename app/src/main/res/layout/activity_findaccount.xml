@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activity.User.VerifySignUpActivity">
+    tools:context=".Activity.User.ForgotPassActivity">
 
     <ImageView
         android:id="@+id/imageView"
@@ -38,22 +38,11 @@
             android:layout_marginBottom="8dp"
             android:ems="10"
             android:gravity="center"
-            android:text="Verify Account"
+            android:text="Find Your Account"
             android:textColor="#7fad39"
             android:textSize="28sp"
             android:textStyle="bold|italic" />
 
-        <TextView
-            android:id="@+id/tvAccount"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="32dp"
-            android:ems="10"
-            android:text="Mã OTP đã được gửi đến nggkhacduong@gmail.com"
-            android:textColor="#787673"
-            android:textSize="14sp" />
 
         <TextView
             android:id="@+id/textView22"
@@ -62,21 +51,21 @@
             android:layout_marginStart="32dp"
             android:layout_marginEnd="32dp"
             android:ems="10"
-            android:text="Vui lòng nhậP mã OTP gồm 6 chữ số."
+            android:text="Nhập Email để tìm tài khoản"
             android:textColor="#787673"
             android:textSize="14sp" />
 
         <EditText
-            android:id="@+id/etOtp"
+            android:id="@+id/etEmail"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginStart="32dp"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="32dp"
-            android:layout_marginBottom="20dp"
+            android:layout_marginBottom="30dp"
             android:background="@drawable/edittext_background"
             android:ems="10"
-            android:hint="Enter OTP..."
+            android:hint="Nhập Email..."
             android:inputType="textPersonName"
             android:paddingStart="20dp"
             android:textColorHint="#464646" />
@@ -87,21 +76,10 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/tvResend"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="0dp"
-                android:layout_marginBottom="8dp"
-                android:text="Gửi lại?"
-                android:textColor="#AD000000"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-            <TextView
                 android:id="@+id/tvCancel"
                 android:layout_width="110dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="50dp"
+                android:layout_marginStart="135dp"
                 android:background="@drawable/button_delete_background"
                 android:gravity="center"
                 android:text="Cancel"
