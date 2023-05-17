@@ -33,9 +33,11 @@ import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface APIService {
-
-    public static final String BASE_URL2="http://192.168.43.18:8080/Web/api/v1/";
+    
+    //public static final String BASE_URL2="http://192.168.43.18:8080/Web/api/v1/";
     //public static final String BASE_URL2="http://192.168.1.20:8080/Web/api/v1/";
+    public static final String BASE_URL2="http://192.168.6.165:8080/Web/api/v1/";
+
     Gson gson = new GsonBuilder().setDateFormat("yyyy MM d HH:mm:ss").create();
 
     OkHttpClient.Builder httpClient = new OkHttpClient.Builder()
@@ -147,6 +149,7 @@ public interface APIService {
                                            @Part("storeId") RequestBody storeId,
                                            @Part MultipartBody.Part image);
 
+    @Multipart
     @PUT("products/{id}")
     Call<OneProductResponse> editStoreProductWithoutImage(@Path("id") long id,
                                                           @Part("name") RequestBody pName,
