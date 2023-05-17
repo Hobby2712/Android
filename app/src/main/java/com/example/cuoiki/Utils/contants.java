@@ -14,6 +14,7 @@ public class contants {
     public static final String URL_CATEGORY= ROOT_URL + "Web/api/v1/categories/";
 
     public static final String URL_PRODUCT = ROOT_URL + "Web/api/v1/products/";
+    public static final String URL_SHIPPER = ROOT_URL + "Web/api/v1/shipper/";
 
     public static final String URL_PRODUCT2 = ROOT_URL + "Web/api/v1/";
 
