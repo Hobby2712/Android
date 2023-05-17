@@ -38,7 +38,7 @@
         <activity android:name=".Activity.User.VerifyChangePassActivity" ></activity>
         <activity android:name=".Activity.User.ProductSearchActivity" ></activity>
         <activity android:name=".Activity.User.CheckoutActivity" ></activity>
-        <activity android:name=".Activity.User.OrderActivity" ></activity>
+
 
         <activity android:name=".Activity.Vendor.AddProductActivity" ></activity>
         <activity android:name=".Activity.Vendor.ManageProductActivity" ></activity>
@@ -46,16 +46,16 @@
         <activity android:name=".Activity.Vendor.ThongKeActivity" ></activity>
         <activity android:name=".Activity.Vendor.ManageOrderActivity" ></activity>
 
-        <activity android:name=".Activity.Shipper.ShipperActivity" ></activity>
+
+
         <activity
-            android:name=".Activity.User.LoginActivity"
+            android:name=".Activity.Shipper.ShipperActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
     </application>
 
 </manifest>

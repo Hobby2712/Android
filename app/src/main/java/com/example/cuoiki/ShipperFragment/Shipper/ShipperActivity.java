@@ -1,4 +1,4 @@
-package com.example.cuoiki.Activity.Shipper;
+package com.example.cuoiki.ShipperFragment.Shipper;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,50 +9,40 @@ import androidx.fragment.app.FragmentManager;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.cuoiki.Activity.User.MainActivity;
-import com.example.cuoiki.Activity.User.OrderActivity;
-import com.example.cuoiki.Adapter.OrderShipperAdapter;
 import com.example.cuoiki.Adapter.ViewPager2Adapter;
-import com.example.cuoiki.Adapter.ViewPager2AdapterShipper;
-import com.example.cuoiki.R;
 import com.example.cuoiki.databinding.ActivityOrderBinding;
-import com.example.cuoiki.databinding.ActivityShipperBinding;
 import com.google.android.material.tabs.TabLayout;
 
 
     public class ShipperActivity extends AppCompatActivity {
-        private ActivityShipperBinding binding;
-        private ViewPager2AdapterShipper viewPager2Adapter;
+        private ActivityOrderBinding binding;
+        private ViewPager2Adapter viewPager2Adapter;
 
-        private TabLayout tabLayout;
-        public void setTabLayout(TabLayout tabLayout) {
-            this.tabLayout = tabLayout;
-        }
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             //viewBinding
-            binding = ActivityShipperBinding.inflate(getLayoutInflater());
+            binding = ActivityOrderBinding.inflate(getLayoutInflater());
             setContentView(binding.getRoot());
-//            binding.ivBack.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View view) {
-//                    Intent intent1 = new Intent(com.example.cuoiki.Activity.Shipper.ShipperActivity.this, MainActivity.class);
-//                    startActivity(intent1);
-//                    finish();
-//                }
-//            });
+            binding.ivBack.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent1 = new Intent(ShipperActivity.this, MainActivity.class);
+                    startActivity(intent1);
+                    finish();
+                }
+            });
 
 
             binding.tabLayout.addTab(binding.tabLayout.newTab().setText("Xác nhận"));
             binding.tabLayout.addTab(binding.tabLayout.newTab().setText("Lấy hàng"));
             binding.tabLayout.addTab(binding.tabLayout.newTab().setText("Dang giao"));
-            binding.tabLayout.addTab(binding.tabLayout.newTab().setText("Đã giao"));
-            binding.tabLayout.addTab(binding.tabLayout.newTab().setText("Trả hàng"));
+            binding.tabLayout.addTab(binding.tabLayout.newTab().setText("Đánh giá"));
+            binding.tabLayout.addTab(binding.tabLayout.newTab().setText("Huy"));
 
             FragmentManager fragmentManager = getSupportFragmentManager();
-            viewPager2Adapter = new ViewPager2AdapterShipper(fragmentManager, getLifecycle());
+            viewPager2Adapter = new ViewPager2Adapter(fragmentManager, getLifecycle());
             binding.viewPager2.setAdapter(viewPager2Adapter);
-
 
             binding.tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
                 @Override

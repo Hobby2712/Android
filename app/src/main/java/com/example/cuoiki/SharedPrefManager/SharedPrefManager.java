@@ -39,6 +39,7 @@ public class SharedPrefManager {
         return mIstance;
     }
 
+
     public void userLogin(User user){
         SharedPreferences sharedPreferences = ctx.getSharedPreferences(SHARE_PREF_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
