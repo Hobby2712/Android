@@ -2,10 +2,16 @@ package com.example.cuoiki.Activity.Vendor;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -26,6 +32,8 @@ import com.example.cuoiki.RoomDatabase.ProductDatabase;
 import com.example.cuoiki.RoomDatabase.RoomProduct;
 import com.example.cuoiki.SharedPrefManager.SharedPrefManager;
 import com.example.cuoiki.Utils.contants;
+import com.example.cuoiki.databinding.ActivityOrderBinding;
+import com.example.cuoiki.databinding.ActivityVendorManagepBinding;
 
 import java.util.List;
 
@@ -35,14 +43,19 @@ import retrofit2.Response;
 
 public class ManageProductActivity extends AppCompatActivity {
 
+    private ActivityVendorManagepBinding binding;
     private RecyclerView listStoreProducts;
     private ProductStoreAdapter adapter;
     int storeId = -1;
     private List<Product> productList;
+    Button btnAddProduct;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_vendor_managep);
+        binding = ActivityVendorManagepBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+        setSupportActionBar(binding.toolBar);
+
         if(SharedPrefManager.getInstance(this).getStoreInfo() == null){
             // Hiển thị thông báo lỗi hoặc thực hiện các xử lý khác
             getStore(SharedPrefManager.getInstance(this).getUser().getId());
@@ -50,11 +63,14 @@ public class ManageProductActivity extends AppCompatActivity {
         } else{
             recyclerViewStoreProducts(SharedPrefManager.getInstance(this).getStoreInfo().getId());
         }
-        //if(store.getId() != -1){
-
-//                Log.e("manager", "storeid: "+store.getId());
-//                Log.e("manager", "storeid: "+SharedPrefManager.getInstance(this).getStoreInfo().getId());
-        //}
+        btnAddProduct = findViewById(R.id.managerAddProductBtn);
+        btnAddProduct.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ManageProductActivity.this, AddProductActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void getStore(int userId){
@@ -132,6 +148,7 @@ public class ManageProductActivity extends AppCompatActivity {
                                         if(response.isSuccessful()){
                                             if(!response.body().isError()){
                                                 Toast.makeText(ManageProductActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                                                recyclerViewStoreProducts(SharedPrefManager.getInstance(getApplicationContext()).getStoreInfo().getId());
                                             } else{
                                                 Toast.makeText(ManageProductActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
                                             }
@@ -147,5 +164,36 @@ public class ManageProductActivity extends AppCompatActivity {
                 })
                 .setNegativeButton("No", null)
                 .show();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_manager, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+        switch (id) {
+            case R.id.menuStatistic:
+                Toast.makeText(this, "Bạn đang chọn thống kê", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(ManageProductActivity.this, ThongKeActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.menuProductManage:
+                Toast.makeText(this, "Bạn đang ở mục quản lý sản phẩm", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.menuOrderManage:
+                Toast.makeText(this, "Bạn đang chọn quản lý đơn hàng", Toast.LENGTH_SHORT).show();
+                Intent intent2 = new Intent(ManageProductActivity.this, ManageOrderActivity.class);
+                startActivity(intent2);
+                break;
+            case R.id.menuLogOut:
+                Toast.makeText(this, "Bạn chọn đăng xuất", Toast.LENGTH_SHORT).show();
+                SharedPrefManager.getInstance(getApplicationContext()).logout();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

@@ -41,6 +41,7 @@
         <activity android:name=".Activity.Vendor.ManageProductActivity" ></activity>
         <activity android:name=".Activity.Vendor.EditProductActivity" ></activity>
         <activity android:name=".Activity.Vendor.ThongKeActivity" ></activity>
+        <activity android:name=".Activity.Vendor.ManageOrderActivity" ></activity>
         <activity
             android:name=".Activity.User.LoginActivity"
             android:exported="true">
