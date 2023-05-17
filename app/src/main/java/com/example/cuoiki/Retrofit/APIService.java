@@ -20,11 +20,13 @@ import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Part;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
@@ -68,6 +70,13 @@ public interface APIService {
     @GET("products")
     Call<ProductResponse> searchProductByName(@Query("search") String search);
 
+    @GET("products")
+    Call<ProductResponse> getProductByStoreId(@Query("store") int storeId);
+
+    @GET("products")
+    Call<ProductResponse> searchStoreProductByName(@Query("store") int storeId,
+                                                   @Query("search") String search);
+
     @FormUrlEncoded
     @POST("login")
     Call<User> login(@Field("user") String username, @Field("pass") String password);
@@ -107,6 +116,20 @@ public interface APIService {
                                         @Part("categoryId") RequestBody cateId,
                                         @Part("storeId") RequestBody storeId,
                                         @Part MultipartBody.Part image);
+
+    @Multipart
+    @PUT("products/{id}")
+    Call<OneProductResponse> editStoreProduct(@Path("id") long id,
+                                           @Part("name") RequestBody pName,
+                                           @Part("price") RequestBody pPrice,
+                                           @Part("description") RequestBody description,
+                                           @Part("quantity") RequestBody quantity,
+                                           @Part("categoryId") RequestBody cateId,
+                                           @Part("storeId") RequestBody storeId,
+                                           @Part MultipartBody.Part image);
+
+    @DELETE("products/{id}")
+    Call<OneProductResponse> deleteProductById(@Path("id") long id);
 
     @GET("stores")
     Call<StoreResponse> getStoreInfoByUserId(@Query("user") int userId);

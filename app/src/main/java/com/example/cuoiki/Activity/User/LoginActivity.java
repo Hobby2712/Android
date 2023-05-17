@@ -20,6 +20,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.bumptech.glide.Glide;
 import com.example.cuoiki.Activity.Shipper.ShipperActivity;
 import com.example.cuoiki.Activity.Vendor.AddProductActivity;
+import com.example.cuoiki.Activity.Vendor.ManageProductActivity;
 import com.example.cuoiki.Activity.Vendor.ThongKeActivity;
 import com.example.cuoiki.Model.Store;
 import com.example.cuoiki.R;
@@ -80,28 +81,6 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    private void getStore(int userId){
-        APIService apiService = RetrofitClient.getInstance().getRetrofit(contants.URL_PRODUCT2).create(APIService.class);
-        apiService.getStoreInfoByUserId(userId).enqueue(new Callback<StoreResponse>() {
-            @Override
-            public void onResponse(Call<StoreResponse> call, retrofit2.Response<StoreResponse> response) {
-                if(response.isSuccessful()){
-                    if(!response.body().isError()){
-                        Store store = response.body().getData().getStore();
-                        SharedPrefManager.getInstance(getApplicationContext()).saveStoreInfo(store);
-                        Log.e("Store id:", SharedPrefManager.getInstance(getApplicationContext()).getStoreInfo().getId() + "====================");
-                    }
-
-                }
-            }
-
-            @Override
-            public void onFailure(Call<StoreResponse> call, Throwable t) {
-                Log.d("store api fail",t.getMessage());
-            }
-        });
-    }
-
     private void userLogin() {
         final String username = etname.getText().toString();
         final String password = etPassword.getText().toString();
@@ -145,8 +124,8 @@ public class LoginActivity extends AppCompatActivity {
                                 }
                                 else if(userJson.getInt("role") == 4) {
                                     //Intent intent = new Intent(LoginActivity.this, ThongKeActivity.class);
-                                    getStore(SharedPrefManager.getInstance(getApplicationContext()).getUser().getId());
-                                    Intent intent = new Intent(LoginActivity.this, AddProductActivity.class);
+                                    //getStore(SharedPrefManager.getInstance(getApplicationContext()).getUser().getId());
+                                    Intent intent = new Intent(LoginActivity.this, ManageProductActivity.class);
                                     startActivity(intent);
                                 }
                                 else{
