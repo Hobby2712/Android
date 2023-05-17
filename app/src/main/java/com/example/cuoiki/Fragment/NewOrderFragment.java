@@ -22,6 +22,7 @@ import com.example.cuoiki.Retrofit.RetrofitClient;
 import com.example.cuoiki.SharedPrefManager.SharedPrefManager;
 import com.example.cuoiki.Utils.contants;
 
+import java.io.IOException;
 import java.util.List;
 
 import retrofit2.Call;
@@ -49,12 +50,12 @@ public class NewOrderFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_neworder, container, false);
         User user = SharedPrefManager.getInstance(getContext()).getUser();
         Log.d("logg",String.valueOf(user.getId()));
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         rc_list = view.findViewById(R.id.imview);
         rc_list.setLayoutManager(linearLayoutManager);
         //Get API
-        apiService= RetrofitClient.getInstance().getRetrofit(contants.URL_PRODUCT).create(APIService.class);
-        apiService.getOrders(String.valueOf(user.getId())).enqueue(new Callback<OrderResponse>() {
+        apiService= RetrofitClient.getInstance().getRetrofit(contants.URL_PRODUCT2).create(APIService.class);
+        apiService.getOrders(1).enqueue(new Callback<OrderResponse>() {
             @Override
             public void onResponse(Call<OrderResponse> call, Response<OrderResponse> response) {
                 if(response.isSuccessful()){
@@ -73,40 +74,9 @@ public class NewOrderFragment extends Fragment {
                 Log.d("logg",t.getMessage());
             }
         });
-
         return view;
     }
 
-    private void loadData(View view) {
-        User user = SharedPrefManager.getInstance(getContext()).getUser();
-        Log.d("logg",String.valueOf(user.getId()));
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
-        rc_list = view.findViewById(R.id.imview);
-        rc_list.setLayoutManager(linearLayoutManager);
-        //Get API
-        apiService= RetrofitClient.getInstance().getRetrofit(contants.URL_PRODUCT).create(APIService.class);
-        apiService.getOrders(String.valueOf(user.getId())).enqueue(new Callback<OrderResponse>() {
-            @Override
-            public void onResponse(Call<OrderResponse> call, Response<OrderResponse> response) {
-                if(response.isSuccessful()){
-                    Log.d("logg",String.valueOf(response.body().getData().getOrders().size()));
-                    orderList=response.body().getData().getOrders();
-                    orderAdapter = new OrderAdapter(orderList, getContext());
-                    rc_list.setAdapter(orderAdapter);
-                }else{
-                    Log.d("logg","Lỗi");
-                    int statusCode=response.code();
-                }
-            }
 
-            @Override
-            public void onFailure(Call<OrderResponse> call, Throwable t) {
-                Log.d("logg",t.getMessage());
-            }
-        });
-
-
-
-    }
 
 }

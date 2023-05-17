@@ -47,15 +47,15 @@
         <activity android:name=".Activity.Vendor.ManageOrderActivity" ></activity>
 
         <activity android:name=".Activity.Shipper.ShipperActivity" ></activity>
-
         <activity
-            android:name=".Activity.User.TesttttttttttActivity"
+            android:name=".Activity.User.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
     </application>
 
 </manifest>
