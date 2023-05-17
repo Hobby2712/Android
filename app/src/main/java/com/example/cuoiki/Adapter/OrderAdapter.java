@@ -20,13 +20,21 @@ import com.example.cuoiki.Model.Product;
 import com.example.cuoiki.R;
 import com.example.cuoiki.Utils.contants;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> {
-    List<Order> orders;
+    List<Order> orders, check;
     Context context;
 
-    public OrderAdapter(List<Order> orders, Context context) {
+    public OrderAdapter(List<Order> check, Context context) {
+        List<Order> orders = new ArrayList<>();
+        for(Order i: check){
+            if(i.getStatus()==1){
+                orders.add(i);
+            }
+        }
+        this.check = check;
         this.orders = orders;
         this.context = context;
     }

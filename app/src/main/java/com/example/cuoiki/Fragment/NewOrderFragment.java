@@ -12,7 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.cuoiki.Adapter.OrderAdapter;
+import com.example.cuoiki.Adapter.UserOrderXNAdapter;
 import com.example.cuoiki.Model.Order;
 import com.example.cuoiki.Model.User;
 import com.example.cuoiki.R;
@@ -23,6 +23,7 @@ import com.example.cuoiki.SharedPrefManager.SharedPrefManager;
 import com.example.cuoiki.Utils.contants;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -31,7 +32,8 @@ import retrofit2.Response;
 
 public class NewOrderFragment extends Fragment {
     private RecyclerView rc_list;
-    private OrderAdapter orderAdapter;
+
+    private UserOrderXNAdapter orderAdapter;
     APIService apiService;
     private List<Order> orderList;
 
@@ -42,7 +44,6 @@ public class NewOrderFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater
@@ -54,14 +55,14 @@ public class NewOrderFragment extends Fragment {
         rc_list = view.findViewById(R.id.imview);
         rc_list.setLayoutManager(linearLayoutManager);
         //Get API
-        apiService= RetrofitClient.getInstance().getRetrofit(contants.URL_SHIPPER).create(APIService.class);
-        apiService.getOrders(1).enqueue(new Callback<OrderResponse>() {
+        apiService= RetrofitClient.getInstance().getRetrofit(contants.URL_PRODUCT2).create(APIService.class);
+        apiService.getOrders(user.getId()).enqueue(new Callback<OrderResponse>() {
             @Override
             public void onResponse(Call<OrderResponse> call, Response<OrderResponse> response) {
                 if(response.isSuccessful()){
                     Log.d("logg",String.valueOf(response.body().getData().getOrders().size()));
                     orderList=response.body().getData().getOrders();
-                    orderAdapter = new OrderAdapter(orderList, getContext());
+                    orderAdapter = new UserOrderXNAdapter(orderList, getContext());
                     rc_list.setAdapter(orderAdapter);
                 }else{
                     Log.d("logg","Lỗi");
