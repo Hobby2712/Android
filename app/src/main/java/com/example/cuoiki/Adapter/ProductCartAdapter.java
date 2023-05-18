@@ -48,7 +48,7 @@ public class ProductCartAdapter extends RecyclerView.Adapter<ProductCartAdapter.
         holder.tvPrice.setText(products.Currency(products.getPrice()));
         holder.tvTotalPrice.setText(products.Currency(products.getPrice()*products.getQuantity()));
         Glide.with(context)
-                .load(contants.ROOT_URL+"Web"+products.getImage())
+                .load(contants.ROOT_URL+"Web/image?fname="+products.getImage())
                 .into(holder.ivImage);
 
         //xử lí sự kiện

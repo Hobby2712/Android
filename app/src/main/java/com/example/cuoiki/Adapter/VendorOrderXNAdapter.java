@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.cuoiki.Activity.User.CartActivity;
 import com.example.cuoiki.Activity.User.OrderActivity;
+import com.example.cuoiki.Activity.Vendor.ManageOrderActivity;
 import com.example.cuoiki.Model.Order;
 import com.example.cuoiki.Model.Product;
 import com.example.cuoiki.R;
@@ -69,7 +70,7 @@ public class VendorOrderXNAdapter extends RecyclerView.Adapter<VendorOrderXNAdap
         holder.quantity.setText(String.valueOf(orders.get(position).getCount()));
         holder.status.setText("Chờ xác nhận");
         Glide.with(context)
-                .load(contants.ROOT_URL+"Web"+orders.get(position).getP().getImage())
+                .load(contants.ROOT_URL+"Web/image?fname="+orders.get(position).getP().getImage())
                 .into(holder.ivImage);
 
         holder.tvCancel.setVisibility(View.INVISIBLE);
@@ -90,7 +91,7 @@ public class VendorOrderXNAdapter extends RecyclerView.Adapter<VendorOrderXNAdap
                                         @Override
                                         public void onClick(DialogInterface dialog, int which) {
                                             Toast.makeText(holder.itemView.getContext(), "Đã xác nhận", Toast.LENGTH_SHORT).show();
-                                            Intent intent = new Intent(holder.itemView.getContext(), OrderActivity.class);
+                                            Intent intent = new Intent(holder.itemView.getContext(), ManageOrderActivity.class);
                                             holder.itemView.getContext().startActivity(intent);
                                         }
                                     })
@@ -136,8 +137,8 @@ public class VendorOrderXNAdapter extends RecyclerView.Adapter<VendorOrderXNAdap
             ivImage = itemView.findViewById(R.id.ivImage);
             status = itemView.findViewById(R.id.tvStatus);
 
-            tvCancel = itemView.findViewById(R.id.tvCancel);
-            tvBuy = itemView.findViewById(R.id.tvBuy);
+            tvCancel = itemView.findViewById(R.id.tvRed);
+            tvBuy = itemView.findViewById(R.id.tvGreen);
         }
     }
 }

@@ -56,7 +56,7 @@ public class UserOrderDangGAdapter extends RecyclerView.Adapter<UserOrderDangGAd
         holder.price.setText(String.valueOf(order.getP().Currency(orders.get(position).getP().getPrice()*orders.get(position).getCount())));
 
         Glide.with(context)
-                .load(contants.ROOT_URL+"Web"+orders.get(position).getP().getImage())
+                .load(contants.ROOT_URL+"Web/image?fname="+orders.get(position).getP().getImage())
                 .into(holder.ivImage);
 
         holder.tvCancel.setVisibility(View.INVISIBLE);
@@ -114,8 +114,8 @@ public class UserOrderDangGAdapter extends RecyclerView.Adapter<UserOrderDangGAd
             ivImage = itemView.findViewById(R.id.ivImage);
             status = itemView.findViewById(R.id.tvStatus);
 
-            tvCancel = itemView.findViewById(R.id.tvCancel);
-            tvBuy = itemView.findViewById(R.id.tvBuy);
+            tvCancel = itemView.findViewById(R.id.tvRed);
+            tvBuy = itemView.findViewById(R.id.tvGreen);
         }
     }
 }

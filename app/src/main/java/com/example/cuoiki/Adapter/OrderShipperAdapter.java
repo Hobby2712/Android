@@ -99,7 +99,7 @@ public class OrderShipperAdapter extends RecyclerView.Adapter<OrderShipperAdapte
                 break;
         }
         Glide.with(context)
-                .load(contants.ROOT_URL+"Web"+orders.get(position).getP().getImage())
+                .load(contants.ROOT_URL+"Web/image?fname="+orders.get(position).getP().getImage())
                 .into(holder.ivImage);
 
         holder.nextAction.setOnClickListener(new View.OnClickListener() {
@@ -174,10 +174,10 @@ public class OrderShipperAdapter extends RecyclerView.Adapter<OrderShipperAdapte
                     public void onFailure(retrofit2.Call<OrderResponse> call, Throwable t) {
 
                     }
-            });
-        }
-    });
-}
+                });
+            }
+        });
+    }
 
 
     @Override

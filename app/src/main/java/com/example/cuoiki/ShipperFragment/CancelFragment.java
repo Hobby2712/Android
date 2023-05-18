@@ -58,6 +58,7 @@ public class CancelFragment extends Fragment {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         rc_list = view.findViewById(R.id.imview);
         rc_list.setLayoutManager(linearLayoutManager);
+
         //Get API
         apiService= RetrofitClient.getInstance().getRetrofit(contants.URL_SHIPPER).create(APIService.class);
         apiService.getShipperOrders("7").enqueue(new Callback<OrderResponse>() {

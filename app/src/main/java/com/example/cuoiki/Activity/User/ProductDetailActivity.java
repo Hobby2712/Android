@@ -106,7 +106,7 @@ public class ProductDetailActivity extends AppCompatActivity {
                     txtpSold.setText(String.valueOf(product.getSold()));
                     txtpQuantity.setText("1");
                     pIntructions.setText(product.getDescription());
-                    Glide.with(getApplicationContext()).load(contants.ROOT_URL+"Web"+product.getImage()).into(pImage);
+                    Glide.with(getApplicationContext()).load(contants.ROOT_URL+"Web/image?fname="+product.getImage()).into(pImage);
                 }
             }
 

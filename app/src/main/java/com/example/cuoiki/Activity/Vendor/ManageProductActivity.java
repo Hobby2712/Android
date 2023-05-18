@@ -123,7 +123,7 @@ public class ManageProductActivity extends AppCompatActivity {
         APIService apiService = RetrofitClient.getInstance().getRetrofit(contants.URL_PRODUCT2).create(APIService.class);
         apiService.getStoreInfoByUserId(userId).enqueue(new Callback<StoreResponse>() {
             @Override
-            public void onResponse(Call<StoreResponse> call, retrofit2.Response<StoreResponse> response) {
+            public void onResponse(Call<StoreResponse> call, Response<StoreResponse> response) {
                 if(response.isSuccessful()){
                     if(!response.body().isError()){
                         Store store = response.body().getData().getStore();

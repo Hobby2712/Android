@@ -70,7 +70,7 @@ public class UserOrderLHAdapter extends RecyclerView.Adapter<UserOrderLHAdapter.
         holder.status.setText("Đang lấy hàng");
 
         Glide.with(context)
-                .load(contants.ROOT_URL+"Web"+orders.get(position).getP().getImage())
+                .load(contants.ROOT_URL+"Web/image?fname="+orders.get(position).getP().getImage())
                 .into(holder.ivImage);
         holder.tvBuy.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -112,7 +112,7 @@ public class UserOrderLHAdapter extends RecyclerView.Adapter<UserOrderLHAdapter.
                     public void onResponse(Call<OrderResponse> call, Response<OrderResponse> response) {
                         if(response.isSuccessful()){
                             new AlertDialog.Builder(holder.itemView.getContext())
-                                    .setTitle("Confirm delete product")
+                                    .setTitle("Confirm cancel product")
                                     .setMessage("Are you sure")
                                     .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                                         @Override
@@ -162,8 +162,8 @@ public class UserOrderLHAdapter extends RecyclerView.Adapter<UserOrderLHAdapter.
             ivImage = itemView.findViewById(R.id.ivImage);
             status = itemView.findViewById(R.id.tvStatus);
 
-            tvCancel = itemView.findViewById(R.id.tvCancel);
-            tvBuy = itemView.findViewById(R.id.tvBuy);
+            tvCancel = itemView.findViewById(R.id.tvRed);
+            tvBuy = itemView.findViewById(R.id.tvGreen);
         }
     }
 }

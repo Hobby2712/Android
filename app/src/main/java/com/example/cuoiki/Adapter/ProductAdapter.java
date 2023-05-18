@@ -45,7 +45,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         holder.fee.setText(String.valueOf(product.Currency(foodDomains.get(position).getPrice())));
 
         Glide.with(context)
-                .load(contants.ROOT_URL+"Web"+foodDomains.get(position).getImage())
+                .load(contants.ROOT_URL+"Web/image?fname="+foodDomains.get(position).getImage())
                 .into(holder.ivImage);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

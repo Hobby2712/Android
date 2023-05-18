@@ -149,7 +149,7 @@ public class EditProductActivity extends AppCompatActivity {
                             Product product = response.body().getData().get1Product();
                             Log.e("Product detail name:", product.getName() + "====================");
                             pName.setText(product.getName());
-                            pPrice.setText(product.Currency(product.getPrice()));
+                            pPrice.setText(product.getPrice());
                             description.setText(product.getDescription());
                             quantity.setText(String.valueOf(product.getQuantity()));
                             int categoryId = product.getCateId();

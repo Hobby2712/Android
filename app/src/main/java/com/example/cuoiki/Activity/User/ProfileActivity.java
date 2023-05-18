@@ -50,7 +50,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
             phone.setText(user.getPhone());
             address.setText(user.getAddress());
             if(!user.getImages().isEmpty()) {
-                Glide.with(getApplicationContext()).load(contants.ROOT_URL + "Web" + user.getImages()).into(imageViewprofile);
+                Glide.with(getApplicationContext()).load(contants.ROOT_URL + "Web/image?fname=" + user.getImages()).into(imageViewprofile);
             }
             else{
                 Glide.with(getApplicationContext()).load(R.drawable.bottom_profile).into(imageViewprofile);

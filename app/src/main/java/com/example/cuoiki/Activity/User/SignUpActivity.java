@@ -25,7 +25,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class SignUpActivity extends AppCompatActivity {
-    private String TAG = LoginActivity.class.getSimpleName();
+    private String TAG = SignUpActivity.class.getSimpleName();
     EditText etUsername, etPassword, etRePass, etEmail;
     LinearLayout btnRedirectLogin;
 
