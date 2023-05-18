@@ -68,7 +68,7 @@ public class DangGiaoShipperAdapter extends RecyclerView.Adapter<DangGiaoShipper
         Order order = orders.get(position);
         holder.name.setText(orders.get(position).getP().getName());
         holder.price.setText(String.valueOf(order.getP().Currency(orders.get(position).getP().getPrice()*orders.get(position).getCount())));
-        holder.quantity.setText(String.valueOf(orders.get(position).getP().getQuantity()));
+        holder.quantity.setText(String.valueOf(orders.get(position).getCount()));
         switch (orders.get(position).getStatus()) {
             case 1:
                 break;
@@ -99,7 +99,7 @@ public class DangGiaoShipperAdapter extends RecyclerView.Adapter<DangGiaoShipper
                 break;
         }
         Glide.with(context)
-                .load(contants.ROOT_URL+"Web"+orders.get(position).getP().getImage())
+                .load(contants.ROOT_URL+"Web/image?fname="+orders.get(position).getP().getImage())
                 .into(holder.ivImage);
 
         holder.nextAction.setOnClickListener(new View.OnClickListener() {

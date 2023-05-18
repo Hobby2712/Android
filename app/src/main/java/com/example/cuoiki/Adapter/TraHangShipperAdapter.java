@@ -68,7 +68,7 @@ public class TraHangShipperAdapter extends RecyclerView.Adapter<TraHangShipperAd
         Order order = orders.get(position);
         holder.name.setText(orders.get(position).getP().getName());
         holder.price.setText(String.valueOf(order.getP().Currency(orders.get(position).getP().getPrice()*orders.get(position).getCount())));
-        holder.quantity.setText(String.valueOf(orders.get(position).getP().getQuantity()));
+        holder.quantity.setText(String.valueOf(orders.get(position).getCount()));
         switch (orders.get(position).getStatus()) {
             case 1:
                 break;
@@ -99,84 +99,11 @@ public class TraHangShipperAdapter extends RecyclerView.Adapter<TraHangShipperAd
                 break;
         }
         Glide.with(context)
-                .load(contants.ROOT_URL+"Web"+orders.get(position).getP().getImage())
+                .load(contants.ROOT_URL+"Web/image?fname="+orders.get(position).getP().getImage())
                 .into(holder.ivImage);
 
-        holder.nextAction.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view){
-                //Get API
-                apiService= RetrofitClient.getInstance().getRetrofit(contants.URL_PRODUCT2).create(APIService.class);
-                apiService.changeStatus(order.getId(),5).enqueue(new Callback<OrderResponse>() {
-                    @Override
-                    public void onResponse(retrofit2.Call<OrderResponse> call, retrofit2.Response<OrderResponse> response) {
-                        if (response.isSuccessful()) {
-                            new AlertDialog.Builder(holder.itemView.getContext())
-                                    .setTitle("Xác nhận nhận đơn ?")
-                                    .setMessage("Are you sure")
-                                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialog, int which) {
-                                            Toast.makeText(holder.itemView.getContext(), "Đã hủy", Toast.LENGTH_SHORT).show();
-                                            Intent intent = new Intent(holder.itemView.getContext(), ShipperActivity.class);
-                                            holder.itemView.getContext().startActivity(intent);
-                                        }
-                                    })
-                                    .setNegativeButton("No", null)
-                                    .show();
-
-                        } else {
-                            Log.d("logg", "Lỗi");
-                            int statusCode = response.code();
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(retrofit2.Call<OrderResponse> call, Throwable t) {
-
-                    }
-                });
-            }
-
-
-
-        });
-        holder.cancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view){
-                //Get API
-                apiService= RetrofitClient.getInstance().getRetrofit(contants.URL_PRODUCT2).create(APIService.class);
-                apiService.changeStatus(order.getId(),5).enqueue(new Callback<OrderResponse>() {
-                    @Override
-                    public void onResponse(retrofit2.Call<OrderResponse> call, retrofit2.Response<OrderResponse> response) {
-                        if (response.isSuccessful()) {
-                            new AlertDialog.Builder(holder.itemView.getContext())
-                                    .setTitle("Confirm delete product")
-                                    .setMessage("Are you sure")
-                                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialog, int which) {
-                                            Toast.makeText(holder.itemView.getContext(), "Đã hủy", Toast.LENGTH_SHORT).show();
-                                            Intent intent = new Intent(holder.itemView.getContext(), ShipperActivity.class);
-                                            holder.itemView.getContext().startActivity(intent);
-                                        }
-                                    })
-                                    .setNegativeButton("No", null)
-                                    .show();
-
-                        } else {
-                            Log.d("logg", "Lỗi");
-                            int statusCode = response.code();
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(retrofit2.Call<OrderResponse> call, Throwable t) {
-
-                    }
-                });
-            }
-        });
+        holder.nextAction.setVisibility(View.INVISIBLE);
+        holder.cancel.setVisibility(View.INVISIBLE);
     }
 
 

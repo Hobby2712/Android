@@ -66,7 +66,7 @@ public class ProductCategoryAdapter extends RecyclerView.Adapter<ProductCategory
         Product product = array.get(position);
         holder.tenSp.setText(product.getName());
         Glide.with(context)
-                .load(contants.ROOT_URL+"Web"+product.getImage())
+                .load(contants.ROOT_URL+"Web/image?fname="+product.getImage())
                 .into(holder.images);
         holder.fee.setText(product.Currency(product.getPrice()));
     }

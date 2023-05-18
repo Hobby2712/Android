@@ -50,7 +50,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
         holder.categoryName.setText(categories.get(position).getName());
         holder.mainLayout.setBackground(ContextCompat.getDrawable(holder.itemView.getContext(), R.drawable.background_category));
         Glide.with(context)
-                .load(contants.ROOT_URL+"Web"+categories.get(position).getImages())
+                .load(contants.ROOT_URL+"Web/image?fname="+categories.get(position).getImages())
                 .into(holder.categoryPic);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {

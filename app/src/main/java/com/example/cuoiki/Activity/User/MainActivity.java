@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity{
 
             userName.setText("Hi "+ user.getUserName());
             if(!user.getImages().isEmpty()) {
-                Glide.with(getApplicationContext()).load(contants.ROOT_URL + "Web" + user.getImages()).into(avatar);
+                Glide.with(getApplicationContext()).load(contants.ROOT_URL + "Web/image?fname=" + user.getImages()).into(avatar);
             }
             else{
                 Glide.with(getApplicationContext()).load(R.drawable.bottom_profile).into(avatar);
@@ -195,7 +195,7 @@ public class MainActivity extends AppCompatActivity{
         apiService= RetrofitClient.getInstance().getRetrofit(contants.URL_CATEGORY).create(APIService.class);
         apiService.getCategoryAll().enqueue(new Callback<CategoryResponse>() {
             @Override
-            public void onResponse(Call<CategoryResponse> call, retrofit2.Response<CategoryResponse> response) {
+            public void onResponse(Call<CategoryResponse> call, Response<CategoryResponse> response) {
                 if(response.isSuccessful()){
                     categoriesList=response.body().getData().getCategories1();
                     adapter = new CategoryAdapter(categoriesList, MainActivity.this);

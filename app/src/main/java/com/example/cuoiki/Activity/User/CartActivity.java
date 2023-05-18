@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -18,22 +19,35 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.cuoiki.Adapter.ProductCartAdapter;
 import com.example.cuoiki.Model.Product;
+import com.example.cuoiki.Model.User;
 import com.example.cuoiki.R;
+import com.example.cuoiki.Response.VerifyResponse;
+import com.example.cuoiki.Retrofit.APIService;
+import com.example.cuoiki.Retrofit.RetrofitClient;
 import com.example.cuoiki.RoomDatabase.ProductDatabase;
 import com.example.cuoiki.RoomDatabase.RoomProduct;
+import com.example.cuoiki.SharedPrefManager.SharedPrefManager;
+import com.example.cuoiki.Utils.contants;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class CartActivity extends AppCompatActivity {
+    private String TAG = CartActivity.class.getSimpleName();
     private AppCompatButton appCompatButton;
     private ImageView iv_back;
     private TextView tvTotalPrice;
     private RecyclerView rc_list;
     private ProductCartAdapter productCartAdapter;
     private List<RoomProduct> productList;
+
+    APIService apiService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +89,7 @@ public class CartActivity extends AppCompatActivity {
         appCompatButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                addToCart();
                 Intent intent = new Intent(CartActivity.this, CheckoutActivity.class);
                 startActivity(intent);
                 finish();
@@ -152,5 +167,39 @@ public class CartActivity extends AppCompatActivity {
         iv_back = findViewById(R.id.iv_back);
         appCompatButton = findViewById(R.id.appCompatButton);
     }
+
+
+    public void addToCart(){
+        User user = SharedPrefManager.getInstance(this).getUser();
+
+        for (RoomProduct i : productList) {
+            APIService apiService1 = RetrofitClient.getInstance().getRetrofit(contants.URL_PRODUCT2).create(APIService.class);
+            apiService1.insertCart(user.getId(),i.getId(),i.getQuantity()).enqueue(new Callback<VerifyResponse>() {
+                @Override
+                public void onResponse(Call<VerifyResponse> call, Response<VerifyResponse> response) {
+                    try {
+                        VerifyResponse signUpResponse = response.body();
+                        if (response.isSuccessful()) {
+                            Toast.makeText(getApplicationContext(), "Thanh toán", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(getApplicationContext(), signUpResponse.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<VerifyResponse> call, Throwable t) {
+                    t.printStackTrace();
+                    //Response failed
+                    Log.e(TAG, "error: " + t.getMessage());
+                }
+            });
+        }
+
+    }
+
+
 
 }

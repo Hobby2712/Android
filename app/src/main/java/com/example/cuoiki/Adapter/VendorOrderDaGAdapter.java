@@ -72,7 +72,7 @@ public class VendorOrderDaGAdapter extends RecyclerView.Adapter<VendorOrderDaGAd
         }
         holder.status.setTextColor(Color.BLACK);
         Glide.with(context)
-                .load(contants.ROOT_URL+"Web"+orders.get(position).getP().getImage())
+                .load(contants.ROOT_URL+"Web/image?fname="+orders.get(position).getP().getImage())
                 .into(holder.ivImage);
 
         holder.tvCancel.setVisibility(View.INVISIBLE);
@@ -102,8 +102,8 @@ public class VendorOrderDaGAdapter extends RecyclerView.Adapter<VendorOrderDaGAd
             ivImage = itemView.findViewById(R.id.ivImage);
             status = itemView.findViewById(R.id.tvStatus);
 
-            tvCancel = itemView.findViewById(R.id.tvCancel);
-            tvBuy = itemView.findViewById(R.id.tvBuy);
+            tvCancel = itemView.findViewById(R.id.tvRed);
+            tvBuy = itemView.findViewById(R.id.tvGreen);
         }
     }
 }

@@ -12,7 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.cuoiki.Adapter.UserOrderXNAdapter;
+import com.example.cuoiki.Adapter.VendorOrderXNAdapter;
 import com.example.cuoiki.Model.Order;
 import com.example.cuoiki.Model.User;
 import com.example.cuoiki.R;
@@ -33,7 +33,7 @@ import retrofit2.Response;
 public class VendorXacNhanFragment extends Fragment {
     private RecyclerView rc_list;
 
-    private UserOrderXNAdapter orderAdapter;
+    private VendorOrderXNAdapter orderAdapter;
     APIService apiService;
     private List<Order> orderList;
 
@@ -61,7 +61,7 @@ public class VendorXacNhanFragment extends Fragment {
                 if(response.isSuccessful()){
                     Log.d("logg",String.valueOf(response.body().getData().getOrders().size()));
                     orderList=response.body().getData().getOrders();
-                    orderAdapter = new UserOrderXNAdapter(orderList, getContext());
+                    orderAdapter = new VendorOrderXNAdapter(orderList, getContext());
                     rc_list.setAdapter(orderAdapter);
                 }else{
                     Log.d("logg","Lỗi");

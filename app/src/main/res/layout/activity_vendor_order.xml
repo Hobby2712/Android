@@ -24,11 +24,90 @@
                 android:padding="16dp"
                 app:title="Xử Lý Đơn Hàng"
                 android:textAppearance="@style/TextAppearance.Widget.AppCompat.Toolbar.Title" />
+            <LinearLayout
+                android:id="@+id/header"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toTopOf="@+id/scrollView2"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="MissingConstraints">
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="55dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="12dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:textColor="#000000"
+                    android:text="Cart"
+                    android:textSize="15sp"
+                    android:textStyle="bold|italic" />
+
+                <TextView
+                    android:id="@+id/textView1"
+                    android:layout_width="55dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="12dp"
+                    android:layout_weight="1"
+                    android:text="Cart"
+                    android:gravity="center"
+                    android:textColor="#000000"
+                    android:textSize="15sp"
+                    android:textStyle="bold|italic" />
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="55dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="12dp"
+                    android:layout_weight="1"
+                    android:text="Cart"
+                    android:gravity="center"
+                    android:textColor="#000000"
+                    android:textSize="15sp"
+                    android:textStyle="bold|italic" />
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="55dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="12dp"
+                    android:layout_weight="1"
+                    android:text="Cart"
+                    android:gravity="center"
+                    android:textColor="#000000"
+                    android:textSize="15sp"
+                    android:textStyle="bold|italic" />
+                <TextView
+                    android:id="@+id/textView4"
+                    android:layout_width="55dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="12dp"
+                    android:layout_weight="1"
+                    android:text="12"
+                    android:gravity="center"
+                    android:textColor="#000000"
+                    android:textSize="15sp"
+                    android:textStyle="bold|italic" />
+                <TextView
+                    android:id="@+id/textView5"
+                    android:layout_width="55dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="12dp"
+                    android:layout_weight="1"
+                    android:text="Cart"
+                    android:gravity="center"
+                    android:textColor="#000000"
+                    android:textSize="15sp"
+                    android:textStyle="bold|italic" />
+            </LinearLayout>
+
             <com.google.android.material.tabs.TabLayout
                 android:id="@+id/tabLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#7fad39"/>
+                android:background="#7fad39"
+                android:nestedScrollingEnabled="false" />
         </com.google.android.material.appbar.AppBarLayout>
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/viewPager2"

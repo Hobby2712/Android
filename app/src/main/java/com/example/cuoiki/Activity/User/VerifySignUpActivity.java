@@ -87,6 +87,11 @@ public class VerifySignUpActivity extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(), signUpResponse.getMessage(), Toast.LENGTH_SHORT).show();
                         if (!signUpResponse.isError()) {
                             User user = signUpResponse.getData().getUser();
+                            user.setAddress("");
+                            user.setFullName("");
+                            user.setImages("");
+                            user.setPhone("");
+
                             SharedPrefManager.getInstance(getApplicationContext()).userLogin(user);
                             finish();
                             Intent intent = new Intent(VerifySignUpActivity.this, MainActivity.class);

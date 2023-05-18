@@ -4,6 +4,7 @@ import com.example.cuoiki.Model.Categories;
 import com.example.cuoiki.Model.User;
 import com.example.cuoiki.Response.Category2Response;
 import com.example.cuoiki.Response.CategoryResponse;
+import com.example.cuoiki.Response.ChartResponse;
 import com.example.cuoiki.Response.OneProductResponse;
 import com.example.cuoiki.Response.OrderResponse;
 import com.example.cuoiki.Response.ProductResponse;
@@ -34,15 +35,13 @@ import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface APIService {
-<<<<<<< HEAD
-=======
     
     public static final String BASE_URL2="http://192.168.43.18:8080/Web/api/v1/";
     //public static final String BASE_URL2="http://192.168.1.20:8080/Web/api/v1/";
     //public static final String BASE_URL2="http://192.168.6.165:8080/Web/api/v1/";
->>>>>>> 0e074ff (lát)
 
-    public static final String BASE_URL2="http://192.168.43.18:8080/Web/api/v1/";
+
+    //public static final String BASE_URL2="http://192.168.43.18:8080/Web/api/v1/";
     //public static final String BASE_URL2="http://192.168.1.20:8080/Web/api/v1/";
     Gson gson = new GsonBuilder().setDateFormat("yyyy MM d HH:mm:ss").create();
 
@@ -73,11 +72,10 @@ public interface APIService {
     @GET("best-seller")
     Call<ProductResponse> getBestSeller();
 
-    @GET("orders")
-    Call<OrderResponse> changeStatus(@Query("id") int id, @Query("status") int status);
+
     @GET("products/{id}")
     Call<OneProductResponse> getProductById(@Path("id") String id);
-    
+
     @GET("products")
     Call<ProductResponse> searchProductByName(@Query("search") String search);
 
@@ -86,17 +84,18 @@ public interface APIService {
 
     @GET("orders")
     Call<OrderResponse> getOrders(@Query("user") int userId);
+
     @GET("orders")
     Call<OrderResponse> getShipperOrders(@Query("status") String status);
+
     @GET("orders")
-<<<<<<< HEAD
-    Call<OrderResponse> getShipperOrders(@Query("status") String status);
-=======
     Call<OrderResponse> getOrdersStore(@Query("store") int storeId);
 
     @GET("orders")
     Call<OrderResponse> changeStatus(@Query("id") int id, @Query("status") int status);
->>>>>>> 0e074ff (lát)
+
+    @GET("orders/count-status")
+    Call<OrderResponse> getQuantityStatus(@Query("store") int storeId);
 
     @GET("products")
     Call<ProductResponse> searchStoreProductByName(@Query("store") int storeId,
@@ -112,6 +111,14 @@ public interface APIService {
     @FormUrlEncoded
     @POST("verifySignUp")
     Call<SignUpResponse> verifysignup(@Field("email") String email, @Field("user") String username, @Field("pass") String password, @Field("otp") String otp, @Field("otpSend") String otpSend);
+
+    @FormUrlEncoded
+    @POST("deleteCart")
+    Call<VerifyResponse> deleteCart(@Field("id") int uId);
+
+    @FormUrlEncoded
+    @POST("addCartItems")
+    Call<VerifyResponse> insertCart(@Field("id") int uId, @Field("pid") int pId, @Field("quantity") int quantity);
 
     @FormUrlEncoded
     @POST("forgotPassword")
@@ -132,6 +139,11 @@ public interface APIService {
     @FormUrlEncoded
     @POST("profile")
     Call<VerifyResponse> editProfile(@Field("id") int id, @Field("name") String name, @Field("address") String address, @Field("phone") String phone);
+
+    @FormUrlEncoded
+    @POST("addOrder")
+    Call<VerifyResponse> addOrder(@Field("id") int id, @Field("name") String name, @Field("phone") String phone, @Field("address") String address);
+
 
     @POST("updateimages.php")
     @Multipart
@@ -164,7 +176,7 @@ public interface APIService {
                                            @Part("categoryId") RequestBody cateId,
                                            @Part("storeId") RequestBody storeId,
                                            @Part MultipartBody.Part image);
-
+    @Multipart
     @PUT("products/{id}")
     Call<OneProductResponse> editStoreProductWithoutImage(@Path("id") long id,
                                                           @Part("name") RequestBody pName,
@@ -179,10 +191,10 @@ public interface APIService {
 
     @GET("stores")
     Call<StoreResponse> getStoreInfoByUserId(@Query("user") int userId);
-    
-    @GET("statistic/chart")
-    Call<ChartResponse> getChart(@Query("store") int storeId);
 
     @GET("statistic")
     Call<ThongKeResponse> getStoreStatistic(@Query("store") int storeId);
+
+    @GET("statistic/chart")
+    Call<ChartResponse> getChart(@Query("store") int storeId);
 }
