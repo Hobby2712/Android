@@ -2,7 +2,7 @@ package com.example.cuoiki.Utils;
 
 public class contants {
 
-    public static String localhost = "192.168.43.18:8080";
+    public static String localhost = "192.168.1.9:8080";
     //public static String localhost = "192.168.1.20:8080";
     //public static String localhost = "192.168.6.165:8080";
 

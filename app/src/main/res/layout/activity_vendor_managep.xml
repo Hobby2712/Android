@@ -43,7 +43,7 @@
         <EditText
             android:id="@+id/etManagerSearchP"
             android:layout_width="280dp"
-            android:layout_height="50dp"
+            android:layout_height="45dp"
             android:layout_marginStart="16dp"
             android:background="@drawable/search_edt_background"
             android:ems="0"
@@ -69,15 +69,13 @@
     <ScrollView
         android:id="@+id/scrollView2"
         android:layout_width="match_parent"
-        android:layout_height="400dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:layout_marginBottom="16dp"
         android:layout_weight="8"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/search"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintTop_toBottomOf="@+id/search">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -87,9 +85,10 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_store_products"
                 android:layout_width="match_parent"
-                android:layout_height="458dp" />
+                android:layout_height="wrap_content" />
         </LinearLayout>
     </ScrollView>
+
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/managerAddProductBtn"
         android:layout_width="match_parent"
